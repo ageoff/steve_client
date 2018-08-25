@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { Layout, Menu, Icon } from 'antd'
 
 import styles from '../assets/css/style.css'
+import another from '../App.css'
 import { keyToPath, pathToKey, content, showHeader, showEventComponents } from '../lib/routeFunc'
 import { routeTable } from '../lib/routeTable'
 import { setRouteLocation } from '../redux/user'
@@ -11,6 +12,7 @@ import { setRouteLocation } from '../redux/user'
 const { Content, Footer, Sider } = Layout
 const MenuItem = Menu.Item
 console.log(styles)
+console.log(another)
 
 class MainLayout extends React.Component {
 	render() {
