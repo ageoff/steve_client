@@ -34,15 +34,15 @@ class MainLayout extends React.Component {
                         mode="inline"
                     >
                         {nav.map((p) => (
-                            <MenuItem className={styles.menuItem} key={p.key}>
+                            <MenuItem key={p.key}>
                                 <Icon type={p.icon} />
                                 <span>{p.title}</span>
                             </MenuItem>
                         ))}
-                        <MenuItem className={styles.minorMenuItem} key="LOGOUT">
+                        {/*<MenuItem className={styles.minorMenuItem} key="LOGOUT">
                             <Icon type="logout" />
                             <span>Logout</span>
-                        </MenuItem>
+                        </MenuItem>*/}
                     </Menu>
                 </Sider>
                 <Layout className={styles.innerLayout}>

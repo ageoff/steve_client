@@ -8,7 +8,7 @@ export const routeTable = [
 	{
 		title: 'Entry',
 		key: 'Entry',
-		icon: 'area-chart',
+		icon: 'home',
 		path: '/app/entry',
 		content: <Entry />,
 		careScenario: '',
@@ -20,7 +20,7 @@ export const routeTable = [
     {
 		title: 'Admin',
 		key: 'Admin',
-		icon: 'area-chart',
+		icon: 'user',
 		path: '/app/admin',
 		content: <Admin />,
 		careScenario: '',
@@ -32,7 +32,7 @@ export const routeTable = [
     {
 		title: 'Decision',
 		key: 'Decision',
-		icon: 'area-chart',
+		icon: 'fork',
 		path: '/app/decision',
 		content: <Decision />,
 		careScenario: '',
