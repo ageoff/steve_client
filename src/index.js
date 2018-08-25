@@ -11,6 +11,8 @@ export const store = ReduxStore
 
 const onBeforeLift = () => {}
 
+persistor.purge()
+
 render(
     <Provider store={store}>
 		<PersistGate
@@ -19,5 +21,5 @@ render(
 			<App/>
 		</PersistGate>
     </Provider>,
-    document.getElementById('root')
+    document.getElementById('app')
 )

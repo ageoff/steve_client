@@ -14,7 +14,7 @@ export const routeTable = [
 		careScenario: '',
 		csName: '',
 		showHeader: true,
-		showEventComponents: false,
+		inSideNav: true,
 		roles: [3, 4, 5, 6, 7, 8]
 	},
     {
@@ -26,7 +26,7 @@ export const routeTable = [
 		careScenario: '',
 		csName: '',
 		showHeader: true,
-		showEventComponents: false,
+		inSideNav: true,
 		roles: [3, 4, 5, 6, 7, 8]
 	},
     {
@@ -38,7 +38,7 @@ export const routeTable = [
 		careScenario: '',
 		csName: '',
 		showHeader: true,
-		showEventComponents: false,
+		inSideNav: true,
 		roles: [3, 4, 5, 6, 7, 8]
 	}
 ]
