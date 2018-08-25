@@ -52,3 +52,20 @@ li[aria-selected="true"].menuItem:after {
 .minorMenuItem:hover {
 	color: #ddd;
 }
+
+.innerNodeAdd {
+	margin-left: 5%;
+}
+
+.inputLabel {
+	width: 10%;
+}
+.inputBox {
+	width: 30%;
+}
+.addNode {
+	width: 5%;
+}
+.deleteNode {
+	width: 5%;
+}

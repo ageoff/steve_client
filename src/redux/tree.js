@@ -6,27 +6,32 @@ let INITIAL_STATE = Immutable({
     data: [
         {
             name: 'First Tree',
+            id: 'asd',
             nodes: [
                 {
                     name: 'First node',
+                    id: 'qwe',
                     nodes: [
                         {
                             name: 'Second Level Node',
+                            id: '4321',
                             nodes: []
                         }
                     ]
                 },
                 {
                     name: 'Second Level Node',
+                    id: '22333',
                     nodes: [
                         {
                             name: 'Another Node',
+                            id: '4424',
                             nodes: []
                         }
                     ]
                 }
             ]
-            
+
         }
     ]
 })
@@ -40,3 +45,9 @@ export default handleActions({
 
 export const setTreeData = createAction('SET_TREE_DATA')
 export const setSelectedTree = createAction('SET_SELECTED_TREE')
+export const saveNode = (node) => {
+    return (dispatch, getState) => {
+        let data = getState().tree.data
+        dispatch(setTreeData([...data, node]))
+    }
+}
