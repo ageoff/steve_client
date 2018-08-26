@@ -6,7 +6,7 @@ import Decision from '../components/Decision'
 
 export const routeTable = [
 	{
-		title: 'Entry',
+		title: 'Home',
 		key: 'Entry',
 		icon: 'home',
 		path: '/app/entry',
@@ -30,7 +30,7 @@ export const routeTable = [
 		roles: [3, 4, 5, 6, 7, 8]
 	},
     {
-		title: 'Decision',
+		title: 'Report Builder',
 		key: 'Decision',
 		icon: 'fork',
 		path: '/app/decision',

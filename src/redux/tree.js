@@ -22,12 +22,14 @@ let INITIAL_STATE = {
                                 {
                                     name: 'Repair',
                                     id: uuid(),
-                                    nodes: []
+                                    nodes: [],
+                                    average: 0
                                 },
                                 {
                                     name: 'Replace',
                                     id: uuid(),
-                                    nodes: []
+                                    nodes: [],
+                                    average: 1779
                                 }
                             ]
                         },

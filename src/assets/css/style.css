@@ -1,11 +1,12 @@
 .mainLayout {
     width: 100%;
+		height: 100%;
     background-color: #fff;
 }
 
-.sidNavContainer {
+.sideNavContainer {
     width: 25%;
-    background-color: #adadad;
+    background-color: #1F4257;
 }
 
 .innerLayout {
@@ -14,10 +15,14 @@
 
 .content {
     width: 100%;
+		position: relative;
+		background-color: #fff;
+		padding-bottom: 122px;
 }
 
 .footer {
     width: 100%;
+		background-color: #fff;
 }
 
 .menuItem {
@@ -68,4 +73,116 @@ li[aria-selected="true"].menuItem:after {
 }
 .deleteNode {
 	width: 5%;
+}
+.totalContainer {
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	border-radius: 7px;
+	display: inline-block;
+	border: 5px solid #CD0000;
+	padding: 20px;
+	background-color: #fff;
+}
+.totalTextLeft {
+	width: 40%;
+	color: #CD0000;
+	font-size: 35px;
+	font-weight: bolder;
+	float: left;
+	padding: 10px;
+}
+.totalTextRight {
+	width: 40%;
+	color: #CD0000;
+	font-size: 35px;
+	font-weight: bolder;
+	float: right;
+	text-align: right;
+	padding: 10px;
+}
+.pageTitle {
+	color: #1F4257;
+	font-size:35px;
+	font-weight: bolder;
+	padding: 10px;
+}
+.sectionTitle {
+	color: #1F4257;
+	font-size: 25px;
+	font-weight: bold;
+	padding: 5px;
+}
+.pickerContainer {
+	width: 90%;
+	margin-left: 5%;
+	border: 1px solid #B0A6A4;
+	border-radius: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 10px;
+}
+.breadcrumbContainer {
+	width: 90%;
+	margin-left: 5%;
+	border: 1px solid #B0A6A4;
+	border-radius: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 10px;
+}
+.nodeSelectable {
+	width: 90%;
+	margin-left: 5%;
+	padding: 10px;
+	border-radius: 5px;
+	cursor: pointer;
+	border: 1px solid #1F4257;
+	margin-top: 5px;
+}
+.nodeSelectable:hover {
+	width: 90%;
+	margin-left: 5%;
+	padding: 10px;
+	border-radius: 5px;
+	cursor: pointer;
+	border: 1px solid #33A1C9;
+	margin-top: 5px;
+}
+
+.nodeSelectable:hover p, .nodeSelectable p:hover {
+	color: #33A1C9;
+	font-size: 20px;
+	font-weight: bold;
+}
+.nodeSelectable p {
+	color: #1F4257;
+	font-size: 20px;
+	font-weight: bold;
+}
+.nodeText {
+	color: #1F4257;
+	font-size: 20px;
+	font-weight: bold;
+}
+.inlineCrumb {
+	width: 90%;
+	margin-left: 5%;
+	padding: 10px;
+}
+.crumbText {
+	color: #1F4257;
+	font-size: 20px;
+	font-weight: bold;
+}
+.crumbSelectable {
+	color: #1F4257;
+	font-size: 20px;
+	font-weight: bold;
+}
+.crumbSelectable:hover, .crumbSelectable:active {
+	color: #33A1C9;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
 }

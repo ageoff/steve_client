@@ -22,6 +22,7 @@ module.exports = {
 			{
 				test: /\.jsx?$/,
 				include: [ path.resolve(__dirname, 'src') ],
+				exclude: 'node_modules',
 				use: [
 					{
 						loader: 'babel-loader',
@@ -30,7 +31,7 @@ module.exports = {
 						}
 					}
 				],
-                
+
 			},
 			/*
 			{

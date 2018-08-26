@@ -34,7 +34,7 @@ class MainLayout extends React.Component {
                         mode="inline"
                     >
                         {nav.map((p) => (
-                            <MenuItem key={p.key}>
+                            <MenuItem className={styles.menuItem} key={p.key}>
                                 <Icon type={p.icon} />
                                 <span>{p.title}</span>
                             </MenuItem>
@@ -50,7 +50,7 @@ class MainLayout extends React.Component {
                         {content(location)}
                     </Content>
                     <Footer className={styles.footer}>
-                        Redivus Health ©{copyYear}
+                        Steve Client ©{copyYear}
                     </Footer>
                 </Layout>
             </Layout>
@@ -66,7 +66,7 @@ const mapStateToProps = state => ({
 })
 const mapDispatchToProps = dispatch => ({
 	onChangePage: (e) => {
-		
+
 		dispatch(setRouteLocation({pathname: keyToPath(e.key), search: '', hash: ''}))
 	}
 })

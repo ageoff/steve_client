@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { setCurrentTree, addSelectedTree, deleteSelectedTree } from '../redux/app'
+import styles from '../assets/css/style.css'
 
 class Decision extends React.Component {
     getParentNode(id) {
@@ -21,19 +22,26 @@ class Decision extends React.Component {
     }
     renderNodes(node) {
         const { setCurrentTree, addSelectedTree } = this.props
+        let crumb = [...this.getBreadcrumb(node.id)]
         return (
             <div>
-                <p onClick={()=>setCurrentTree(this.getParentNode(node.id))}>{node.name}</p>
+                <div className={styles.inlineCrumb}>
+                    {crumb.map((c, i) => (
+                        <span className={styles.crumbSelectable} onClick={()=>setCurrentTree(c.id)}>{c.name + ((i!=(crumb.length-1)) ? ' -> ' : '')}</span>
+                    ))}
+                </div>
                 {node.nodes.map(n => (
-                    <p onClick={()=>{
-                        if (n.nodes.length == 0) {
-                            addSelectedTree(n.id)
-                            setCurrentTree('')
-                        }
-                        else {
-                            setCurrentTree(n.id)
-                        }
-                    }}>{n.name}</p>
+                    <div className={styles.nodeSelectable}>
+                        <p className={styles.nodeText} onClick={()=>{
+                            if (n.nodes.length == 0) {
+                                addSelectedTree(n.id)
+                                setCurrentTree('')
+                            }
+                            else {
+                                setCurrentTree(n.id)
+                            }
+                        }}>{n.name}</p>
+                    </div>
                 ))}
             </div>
         )
@@ -42,7 +50,11 @@ class Decision extends React.Component {
     renderCurrentTree() {
         const { trees, currentTree, setCurrentTree } = this.props
         if (currentTree === '') {
-            return trees.map(t => (<p onClick={()=>setCurrentTree(t.id)}>{t.name}</p>))
+            return trees.map(t => (
+                <div className={styles.nodeSelectable}>
+                    <p className={styles.nodeText} onClick={()=>setCurrentTree(t.id)}>{t.name}</p>
+                </div>
+            ))
         }
         else {
             let node = null
@@ -59,34 +71,74 @@ class Decision extends React.Component {
 
     getBreadcrumb(id) {
         const { trees } = this.props
-        console.log('Getting the crumb')
         let crumb = []
         trees.map(t => {
             const checkChildren = (node, c = []) => {
-                c.push(node.name)
+                c.push({name: node.name, id: node.id})
+                if (node.id === id) crumb = c
                 node.nodes.map(n => {
-                    if (n.id === id) crumb = [...c, n.name]
+                    if (n.id === id) crumb = [...c, {name: n.name, id: n.id}]
                     else checkChildren(n, [...c])
                 })
             }
             checkChildren(t)
         })
-        console.log('Crumb: ')
-        console.log(crumb)
         return crumb
+    }
+
+    getCost(id) {
+        const { trees } = this.props
+        let cost = 0
+        trees.map(t => {
+            const checkChildren = (node) => {
+                node.nodes.map(n => {
+                    if (n.id === id) cost = n.average || 0
+                    else checkChildren(n)
+                })
+            }
+            if (t.id === id) cost = n.average || 0
+            else checkChildren(t)
+        })
+        return cost
     }
 
 	render() {
         const { trees, currentTree, selectedTrees } = this.props
+        let total = 0
+        selectedTrees.map(id=>{
+            total+=this.getCost(id)
+        })
+        Number.prototype.formatMoney = function(c, d, t){
+            var n = this,
+            c = isNaN(c = Math.abs(c)) ? 2 : c,
+            d = d == undefined ? "." : d,
+            t = t == undefined ? "," : t,
+            s = n < 0 ? "-" : "",
+            i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+            j = (j = i.length) > 3 ? j % 3 : 0;
+           return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
+         };
         return (
             <div>
-                <h1>{'Pick entries'}</h1>
-                {this.renderCurrentTree()}
-                {selectedTrees.map(id => (
-                    <div>
-                        {this.getBreadcrumb(id).map(c => (<span>{c+'=>'}</span>))}
-                    </div>
-                ))}
+                <p className={styles.pageTitle}>{'Report Builder'}</p>
+                <div className={styles.pickerContainer}>
+                    <p className={styles.sectionTitle}>{'Item Picker'}</p>
+                    {this.renderCurrentTree()}
+                </div>
+                <div className={styles.breadcrumbContainer}>
+                    <p className={styles.sectionTitle}>{'Selected Items'}</p>
+                    {selectedTrees.length == 0 && <div className={styles.inlineCrumb}><span className={styles.crumbText}>{'No Items Selected'}</span></div>}
+                    {selectedTrees.map(id => (
+                        <div className={styles.inlineCrumb}>
+                            {this.getBreadcrumb(id).map(c => (<span className={styles.crumbText}>{c.name+' -> '}</span>))}
+                            <span className={styles.crumbText}>{'$'+this.getCost(id).formatMoney()}</span>
+                        </div>
+                    ))}
+                </div>
+                <div className={styles.totalContainer}>
+                    <p className={styles.totalTextLeft}>{'Total: '}</p>
+                    <p className={styles.totalTextRight}>{'$' + total.formatMoney()}</p>
+                </div>
             </div>
         )
 	}
