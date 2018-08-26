@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete, Collapse } from 'antd';
-import { setSelectedTree, saveNode } from '../redux/tree'
+import { setSelectedTree, saveNode, setAddNode, setEditNode } from '../redux/tree'
 import { setAdminView } from '../redux/app'
 import { aViewManage, aViewEdit, aViewAdd } from '../lib/constants'
 import uuid from 'uuid/v4'
@@ -13,9 +13,6 @@ const { Panel } = Collapse.Panel
 const emptyNode = {name: 'Untitled Node', id:uuid(), nodes: []}
 
 class Admin extends React.Component {
-    state = {
-        addNode: emptyNode
-    }
 
     generateNode() {
         return {
@@ -26,42 +23,47 @@ class Admin extends React.Component {
     }
 
     deleteNode(id) {
-        const { addNode } = this.state
-        let temp = {...addNode}
+        const { addNode, editNode, setAddNode, setEditNode, aView } = this.props
+        let temp = aView === aViewAdd ? {...addNode} : {...editNode}
         const filterNodes = (nodes, checkId) => {
             nodes = nodes.filter(item => item.id !== checkId)
             nodes.forEach(n => n.nodes = filterNodes(n.nodes, checkId))
             return nodes
         }
         temp.nodes = filterNodes(temp.nodes, id)
-        this.setState({addNode: temp})
+        if (aView === aViewAdd) setAddNode(temp)
+        else setEditNode(temp)
     }
 
     modifyNode(id, text) {
-        const { addNode } = this.state
-        let temp = {...addNode}
+        const { addNode, editNode, setAddNode, setEditNode, aView } = this.props
+        let one = (aView === aViewAdd) ? {...addNode} : {...editNode}
+        let temp = {...one}
         const checkNodes = (n, checkId) => {
             if (n.id === checkId) n.name = text
             else n.nodes.forEach(j => checkNodes(j, checkId))
         }
         checkNodes(temp, id)
-        this.setState({addNode: temp})
+        if (aView === aViewAdd) setAddNode(temp)
+        else setEditNode(temp)
     }
 
     addNewNode(id) {
-        const { addNode } = this.state
-        let temp = {...addNode}
+        const { addNode, editNode, setAddNode, setEditNode, aView } = this.props
+        let temp = aView === aViewAdd ? {...addNode} : {...editNode}
         const checkNodes = (n, checkId) => {
             if (n.id === checkId) n.nodes = [...n.nodes, this.generateNode()]
             else n.nodes.forEach(j => checkNodes(j, checkId))
         }
         checkNodes(temp, id)
-        this.setState({addNode: temp})
+        if (aView === aViewAdd) setAddNode(temp)
+        else setEditNode(temp)
     }
 
     editTree(tree) {
-        const { setSelectedTree, setAdminView} = this.props
-        setSelectedTree(tree)
+        const { setEditNode, setAdminView} = this.props
+        console.log(tree)
+        setEditNode(tree)
         setAdminView(aViewEdit)
     }
 
@@ -78,15 +80,28 @@ class Admin extends React.Component {
     }
 
 	render() {
-        const { trees, aView, selectedTree, setAdminView, saveNode } = this.props
-        const { addNode } = this.state
+        const { trees, aView, selectedTree, setAdminView, saveNode, setEditNode, addNode, editNode } = this.props
+        const renderAddN = (node) => (
+            <div>
+                {node.nodes.map(n => (
+                    <Collapse>
+                        <Collapse.Panel header={n.name}>
+                            <p className={styles.inputLabel}>{'Name: '}</p><input className={styles.inputBox} value={n.name} onChange={e=>this.modifyNode(n.id, e.target.value)}/>
+                            <div className={styles.addNode} onClick={this.addNewNode.bind(this, n.id)}><Icon type='plus' /></div>
+                            <div className={styles.deleteNode} onClick={this.deleteNode.bind(this, n.id)}><Icon type='delete' /></div>
+                            {renderAddN(n)}
+                        </Collapse.Panel>
+                    </Collapse>
+                ))}
+            </div>
+        )
         switch (aView) {
         case aViewManage:
             return (
                 <div>
                     <h1>{'Manage Decision Trees'}</h1>
                     <h3 onClick={()=>setAdminView(aViewAdd)}>{'Add New Node'}</h3>
-                    {trees.map(tree => (
+                    {[...trees].map(tree => (
                         <div>
                             <p>{tree.name}</p>
                             <p onClick={this.editTree.bind(this, tree)}>Click Here to Edit Decision tree</p>
@@ -97,39 +112,39 @@ class Admin extends React.Component {
         case aViewEdit:
             return (
                 <div>
-                    <h1>{'Edit Tree: ' + selectedTree.name}</h1>
-                    {this.renderNodes(selectedTree)}
+                    <h1>{'Edit Tree: ' + editNode.name}</h1>
+                    <Collapse>
+                        <Collapse.Panel header={editNode.name}>
+                            <p className={styles.inputLabel}>{'Decision Tree Name: '}</p><input className={styles.inputBox} value={editNode.name} onChange={e=>this.modifyNode(editNode.id, e.target.value)}/>
+                            <div className={styles.addNode} onClick={() => this.addNewNode(editNode.id)}><Icon type='plus' /></div>
+                            {renderAddN(editNode)}
+                        </Collapse.Panel>
+                    </Collapse>
+                    <div onClick={() => {
+                        console.log('HERE IS WHERE THE EDIT IS::::')
+                        console.log(editNode)
+                        console.log(editNode.id)
+                        saveNode({...editNode}, editNode.id)
+                        setEditNode({...emptyNode})
+                        setAdminView(aViewManage)
+                    }}><h3>{'Save'}</h3></div>
                     <p onClick={() => setAdminView(aViewManage)}>{'Cancel'}</p>
                 </div>
             )
         case aViewAdd:
-            const renderAddN = (node) => (
-                <div>
-                    {node.nodes.map(n => (
-                        <Collapse>
-                            <Collapse.Panel header={n.name}>
-                                <p className={styles.inputLabel}>{'Name: '}</p><input className={styles.inputBox} value={n.name} onChange={e=>this.modifyNode(n.id, e.target.value)}/>
-                                <div className={styles.addNode} onClick={this.addNewNode.bind(this, n.id)}><Icon type='plus' /></div>
-                                <div className={styles.deleteNode} onClick={this.deleteNode.bind(this, n.id)}><Icon type='delete' /></div>
-                                {renderAddN(n)}
-                            </Collapse.Panel>
-                        </Collapse>
-                    ))}
-                </div>
-            )
             return (
                 <div>
                     <h1>{'Add Tree'}</h1>
                     <Collapse>
                         <Collapse.Panel header={addNode.name}>
-                            <p className={styles.inputLabel}>{'Decision Tree Name: '}</p><input className={styles.inputBox} value={addNode.name} onChange={e=>this.setState({addNode: {name: e.target.value, nodes:addNode.nodes}})}/>
+                            <p className={styles.inputLabel}>{'Decision Tree Name: '}</p><input className={styles.inputBox} value={addNode.name} onChange={e=>this.modifyNode(addNode.id, e.target.value)}/>
                             <div className={styles.addNode} onClick={() => this.addNewNode(addNode.id)}><Icon type='plus' /></div>
                             {renderAddN(addNode)}
                         </Collapse.Panel>
                     </Collapse>
                     <div onClick={() => {
-                        saveNode(addNode)
-                        this.setState({addNode: emptyNode})
+                        saveNode({...addNode})
+                        setAddNode({...emptyNode})
                         setAdminView(aViewManage)
                     }}><h3>{'Save'}</h3></div>
                     <p onClick={() => setAdminView(aViewManage)}>{'Cancel'}</p>
@@ -142,6 +157,8 @@ Admin.propTypes = {
 	trees: PropTypes.array.isRequired,
     selectedTree: PropTypes.object.isRequired,
     aView: PropTypes.string.isRequired,
+    addNode: PropTypes.object.isRequired,
+    editNode: PropTypes.object.isRequired,
     //Fuctions
     setSelectedTree: PropTypes.func.isRequired,
     setAdminView: PropTypes.func.isRequired,
@@ -150,11 +167,15 @@ Admin.propTypes = {
 const mapStateToProps = state => ({
 	trees: state.tree.data,
     selectedTree: state.tree.selectedTree,
-    aView: state.app.adminView
+    aView: state.app.adminView,
+    addNode: state.tree.addNode,
+    editNode: state.tree.editNode
 })
 const mapDispatchToProps = dispatch => ({
 	setSelectedTree: (tree) => dispatch(setSelectedTree(tree)),
     setAdminView: (view) => dispatch(setAdminView(view)),
-    saveNode: (node) => dispatch(saveNode(node))
+    saveNode: (node, id = undefined) => dispatch(saveNode(node, id)),
+    setAddNode: (node) => dispatch(setAddNode(node)),
+    setEditNode: (node) => dispatch(setEditNode(node))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Admin)
