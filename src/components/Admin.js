@@ -99,55 +99,64 @@ class Admin extends React.Component {
         case aViewManage:
             return (
                 <div>
-                    <h1>{'Manage Decision Trees'}</h1>
-                    <h3 onClick={()=>setAdminView(aViewAdd)}>{'Add New Node'}</h3>
-                    {[...trees].map(tree => (
-                        <div>
-                            <p>{tree.name}</p>
-                            <p onClick={this.editTree.bind(this, tree)}>Click Here to Edit Decision tree</p>
+                    <p className={styles.pageTitle}>{'Manage Decision Trees'}</p>
+                    <div className={styles.adminContainer}>
+                        <div className={styles.addContainer}>
+                            <div className={styles.addButton}><p className={styles.buttonText} onClick={()=>setAdminView(aViewAdd)}>{'Add New Node'}</p></div>
                         </div>
-                    ))}
+                        {[...trees].map(tree => (
+                            <div className={styles.manageNode}>
+                                <p className={styles.nodeText}>{tree.name}</p>
+                                <div className={styles.editButton}><p className={styles.smallButtonText} onClick={this.editTree.bind(this, tree)}>{'Edit Node'}</p></div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             )
         case aViewEdit:
             return (
                 <div>
-                    <h1>{'Edit Tree: ' + editNode.name}</h1>
-                    <Collapse>
-                        <Collapse.Panel header={editNode.name}>
-                            <p className={styles.inputLabel}>{'Decision Tree Name: '}</p><input className={styles.inputBox} value={editNode.name} onChange={e=>this.modifyNode(editNode.id, e.target.value)}/>
-                            <div className={styles.addNode} onClick={() => this.addNewNode(editNode.id)}><Icon type='plus' /></div>
-                            {renderAddN(editNode)}
-                        </Collapse.Panel>
-                    </Collapse>
-                    <div onClick={() => {
-                        console.log('HERE IS WHERE THE EDIT IS::::')
-                        console.log(editNode)
-                        console.log(editNode.id)
-                        saveNode({...editNode}, editNode.id)
-                        setEditNode({...emptyNode})
-                        setAdminView(aViewManage)
-                    }}><h3>{'Save'}</h3></div>
-                    <p onClick={() => setAdminView(aViewManage)}>{'Cancel'}</p>
+                    <p className={styles.pageTitle}>{'Edit Tree: ' + editNode.name}</p>
+                    <div className={styles.adminContainer}>
+                        <Collapse defaultActiveKey={['1']}>
+                            <Collapse.Panel header={editNode.name}>
+                                <p className={styles.inputLabel}>{'Decision Tree Name: '}</p><input className={styles.inputBox} value={editNode.name} onChange={e=>this.modifyNode(editNode.id, e.target.value)}/>
+                                <div className={styles.addNode} onClick={() => this.addNewNode(editNode.id)}><Icon type='plus' /></div>
+                                {renderAddN(editNode)}
+                            </Collapse.Panel>
+                        </Collapse>
+                        <div className={styles.buttonContainer}>
+                            <div className={styles.cancelButton}><p className={styles.buttonText} onClick={() => setAdminView(aViewManage)}>{'Cancel'}</p></div>
+                            <div className={styles.saveButton} onClick={() => {
+                                saveNode({...editNode}, editNode.id)
+                                setEditNode({...emptyNode})
+                                setAdminView(aViewManage)
+                            }}><p className={styles.buttonText}>{'Save'}</p></div>
+                        </div>
+                    </div>
                 </div>
             )
         case aViewAdd:
             return (
                 <div>
-                    <h1>{'Add Tree'}</h1>
-                    <Collapse>
-                        <Collapse.Panel header={addNode.name}>
-                            <p className={styles.inputLabel}>{'Decision Tree Name: '}</p><input className={styles.inputBox} value={addNode.name} onChange={e=>this.modifyNode(addNode.id, e.target.value)}/>
-                            <div className={styles.addNode} onClick={() => this.addNewNode(addNode.id)}><Icon type='plus' /></div>
-                            {renderAddN(addNode)}
-                        </Collapse.Panel>
-                    </Collapse>
-                    <div onClick={() => {
-                        saveNode({...addNode})
-                        setAddNode({...emptyNode})
-                        setAdminView(aViewManage)
-                    }}><h3>{'Save'}</h3></div>
-                    <p onClick={() => setAdminView(aViewManage)}>{'Cancel'}</p>
+                    <p className={styles.pageTitle}>{'Add Tree'}</p>
+                    <div className={styles.adminContainer}>
+                        <Collapse defaultActiveKey={['1']}>
+                            <Collapse.Panel header={addNode.name}>
+                                <p className={styles.inputLabel}>{'Decision Tree Name: '}</p><input className={styles.inputBox} value={addNode.name} onChange={e=>this.modifyNode(addNode.id, e.target.value)}/>
+                                <div className={styles.addNode} onClick={() => this.addNewNode(addNode.id)}><Icon type='plus' /></div>
+                                {renderAddN(addNode)}
+                            </Collapse.Panel>
+                        </Collapse>
+                        <div className={styles.buttonContainer}>
+                            <div className={styles.cancelButton}><p className={styles.buttonText} onClick={() => setAdminView(aViewManage)}>{'Cancel'}</p></div>
+                            <div className={styles.saveButton} onClick={() => {
+                                saveNode({...addNode})
+                                setAddNode({...emptyNode})
+                                setAdminView(aViewManage)
+                            }}><p className={styles.buttonText}>{'Save'}</p></div>
+                        </div>
+                    </div>
                 </div>
             )
         }

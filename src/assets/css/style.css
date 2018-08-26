@@ -186,3 +186,69 @@ li[aria-selected="true"].menuItem:after {
 	font-weight: bold;
 	cursor: pointer;
 }
+.buttonContainer {
+	width: 100%;
+	margin-top: 15px;
+	display: inline-block;
+}
+.saveButton {
+	width: 40%;
+	margin-left: 2%;
+	background-color: #1F4257;
+	border-radius: 5px;
+	float: left;
+}
+.addContainer {
+	width: 100%;
+	display: inline-block;
+}
+.addButton {
+	width: 20%;
+	background-color: #1F4257;
+	border-radius: 5px;
+	float: right;
+}
+.editButton {
+	width: 20%;
+	background-color: #4DBD33;
+	border-radius: 5px;
+	float: right;
+}
+.smallButtonText {
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	padding: 5px;
+}
+.cancelButton {
+	width: 40%;
+	margin-left: 9%;
+	background-color: #CD0000;
+	border-radius: 5px;
+	float: left;
+}
+.buttonText {
+	color: #fff;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	padding: 10px;
+}
+.adminContainer {
+	width: 90%;
+	margin-left: 5%;
+	margin-top: 10px;
+}
+.manageNode {
+	width: 90%;
+	margin-left: 5%;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid #1F4257;
+	margin-top: 5px;
+	display: inline-block;
+}
+.manageNode > p {
+	float: left;
+}
