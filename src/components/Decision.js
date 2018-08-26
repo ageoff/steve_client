@@ -20,12 +20,20 @@ class Decision extends React.Component {
         return parent
     }
     renderNodes(node) {
-        const { setCurrentTree } = this.props
+        const { setCurrentTree, addSelectedTree } = this.props
         return (
             <div>
                 <p onClick={()=>setCurrentTree(this.getParentNode(node.id))}>{node.name}</p>
                 {node.nodes.map(n => (
-                    <p onClick={()=>setCurrentTree(n.id)}>{n.name}</p>
+                    <p onClick={()=>{
+                        if (n.nodes.length == 0) {
+                            addSelectedTree(n.id)
+                            setCurrentTree('')
+                        }
+                        else {
+                            setCurrentTree(n.id)
+                        }
+                    }}>{n.name}</p>
                 ))}
             </div>
         )
@@ -49,12 +57,36 @@ class Decision extends React.Component {
         }
     }
 
+    getBreadcrumb(id) {
+        const { trees } = this.props
+        console.log('Getting the crumb')
+        let crumb = []
+        trees.map(t => {
+            const checkChildren = (node, c = []) => {
+                c.push(node.name)
+                node.nodes.map(n => {
+                    if (n.id === id) crumb = [...c, n.name]
+                    else checkChildren(n, [...c])
+                })
+            }
+            checkChildren(t)
+        })
+        console.log('Crumb: ')
+        console.log(crumb)
+        return crumb
+    }
+
 	render() {
-        const { trees, currentTree } = this.props
+        const { trees, currentTree, selectedTrees } = this.props
         return (
             <div>
                 <h1>{'Pick entries'}</h1>
                 {this.renderCurrentTree()}
+                {selectedTrees.map(id => (
+                    <div>
+                        {this.getBreadcrumb(id).map(c => (<span>{c+'=>'}</span>))}
+                    </div>
+                ))}
             </div>
         )
 	}

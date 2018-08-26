@@ -14,7 +14,7 @@ export default handleActions({
 	REHYDRATE_ALL_STATES: (state) => ({...state, LoadedFromDisk: true}),
 	SET_ADMIN_VIEW: (state, action) => ({...state, adminView: action.payload}),
 	SET_CURRENT_TREE: (state, action) => ({...state, currentTree: action.payload}),
-	SET_SELECTED_TREES: (state, action) => ({...state, setSelectedTree: action.payload})
+	SET_SELECTED_TREES: (state, action) => ({...state, selectedTrees: action.payload})
 }, INITIAL_STATE)
 
 export const setAdminView = createAction('SET_ADMIN_VIEW')
