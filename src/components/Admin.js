@@ -10,7 +10,7 @@ import uuid from 'uuid/v4'
 import styles from '../assets/css/style.css'
 
 const { Panel } = Collapse.Panel
-const emptyNode = {name: 'Untitled Node', id:uuid(), nodes: []}
+const emptyNode = {name: 'Untitled Node', id:uuid(), nodes: [], average: 0}
 
 class Admin extends React.Component {
 
@@ -41,6 +41,19 @@ class Admin extends React.Component {
         let temp = {...one}
         const checkNodes = (n, checkId) => {
             if (n.id === checkId) n.name = text
+            else n.nodes.forEach(j => checkNodes(j, checkId))
+        }
+        checkNodes(temp, id)
+        if (aView === aViewAdd) setAddNode(temp)
+        else setEditNode(temp)
+    }
+
+    modifyNodeAverage(id, text) {
+        const { addNode, editNode, setAddNode, setEditNode, aView } = this.props
+        let one = (aView === aViewAdd) ? {...addNode} : {...editNode}
+        let temp = {...one}
+        const checkNodes = (n, checkId) => {
+            if (n.id === checkId) n.average = Number(text)
             else n.nodes.forEach(j => checkNodes(j, checkId))
         }
         checkNodes(temp, id)
@@ -86,9 +99,14 @@ class Admin extends React.Component {
                 {node.nodes.map(n => (
                     <Collapse>
                         <Collapse.Panel header={n.name}>
-                            <p className={styles.inputLabel}>{'Name: '}</p><input className={styles.inputBox} value={n.name} onChange={e=>this.modifyNode(n.id, e.target.value)}/>
-                            <div className={styles.addNode} onClick={this.addNewNode.bind(this, n.id)}><Icon type='plus' /></div>
-                            <div className={styles.deleteNode} onClick={this.deleteNode.bind(this, n.id)}><Icon type='delete' /></div>
+                            <div className={styles.nodeInputContainer}>
+                                <div className={styles.inputBox}>
+                                    <p><span>{'Name: '}</span><input value={n.name} onChange={e=>this.modifyNode(n.id, e.target.value)}/></p>
+                                    <p><span>{'Average: $'}</span><input type='number' step='0.01' value={n.average || 0} onChange={e=>this.modifyNodeAverage(n.id, e.target.value)}/></p>
+                                </div>
+                                <div className={styles.addNode} onClick={this.addNewNode.bind(this, n.id)}><Icon className={styles.addIcon} type='plus' /></div>
+                                <div className={styles.deleteNode} onClick={this.deleteNode.bind(this, n.id)}><Icon className={styles.deleteIcon} type='delete' /></div>
+                            </div>
                             {renderAddN(n)}
                         </Collapse.Panel>
                     </Collapse>
@@ -120,8 +138,12 @@ class Admin extends React.Component {
                     <div className={styles.adminContainer}>
                         <Collapse defaultActiveKey={['1']}>
                             <Collapse.Panel header={editNode.name}>
-                                <p className={styles.inputLabel}>{'Decision Tree Name: '}</p><input className={styles.inputBox} value={editNode.name} onChange={e=>this.modifyNode(editNode.id, e.target.value)}/>
-                                <div className={styles.addNode} onClick={() => this.addNewNode(editNode.id)}><Icon type='plus' /></div>
+                                <div className={styles.nodeInputContainer}>
+                                    <p className={styles.inputLabel}>{'Decision Tree Name: '}</p><input className={styles.inputBox} value={editNode.name} onChange={e=>this.modifyNode(editNode.id, e.target.value)}/>
+                                    <div className={styles.addNode} onClick={() => this.addNewNode(editNode.id)}>
+                                        <div className={styles.saveButton}><Icon className={styles.addIcon} type='plus' /></div>
+                                    </div>
+                                </div>
                                 {renderAddN(editNode)}
                             </Collapse.Panel>
                         </Collapse>
@@ -143,8 +165,12 @@ class Admin extends React.Component {
                     <div className={styles.adminContainer}>
                         <Collapse defaultActiveKey={['1']}>
                             <Collapse.Panel header={addNode.name}>
-                                <p className={styles.inputLabel}>{'Decision Tree Name: '}</p><input className={styles.inputBox} value={addNode.name} onChange={e=>this.modifyNode(addNode.id, e.target.value)}/>
-                                <div className={styles.addNode} onClick={() => this.addNewNode(addNode.id)}><Icon type='plus' /></div>
+                                <div className={styles.nodeInputContainer}>
+                                    <p className={styles.inputLabel}>{'Decision Tree Name: '}</p><input className={styles.inputBox} value={addNode.name} onChange={e=>this.modifyNode(addNode.id, e.target.value)}/>
+                                    <div className={styles.addNode} onClick={() => this.addNewNode(addNode.id)}>
+                                        <div className={styles.saveButton}><Icon className={styles.addIcon} type='plus' /></div>
+                                    </div>
+                                </div>
                                 {renderAddN(addNode)}
                             </Collapse.Panel>
                         </Collapse>

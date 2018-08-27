@@ -4,7 +4,7 @@ import uuid from 'uuid/v4'
 
 let INITIAL_STATE = {
     selectedTree: {},
-    addNode:  {name: 'Untitled Node', id:uuid(), nodes: []},
+    addNode:  {name: 'Untitled Node', id:uuid(), nodes: [], average: 0},
     editNode: {},
     data: [
         {
@@ -40,12 +40,14 @@ let INITIAL_STATE = {
                                 {
                                     name: 'Repair',
                                     id: uuid(),
-                                    nodes: []
+                                    nodes: [],
+                                    average: 625
                                 },
                                 {
                                     name: 'Replace',
                                     id: uuid(),
-                                    nodes: []
+                                    nodes: [],
+                                    average: 1234
                                 }
                             ]
                         }
@@ -58,12 +60,14 @@ let INITIAL_STATE = {
                         {
                             name: 'Repair',
                             id: uuid(),
-                            nodes: []
+                            nodes: [],
+                            average: 540
                         },
                         {
                             name: 'Replace',
                             id: uuid(),
-                            nodes: []
+                            nodes: [],
+                            average: 9161
                         }
                     ]
                 },
@@ -78,12 +82,14 @@ let INITIAL_STATE = {
                                 {
                                     name: 'Repair',
                                     id: uuid(),
-                                    nodes: []
+                                    nodes: [],
+                                    average: 0
                                 },
                                 {
                                     name: 'Replace',
                                     id: uuid(),
-                                    nodes: []
+                                    nodes: [],
+                                    average: 9775
                                 }
                             ]
                         },
@@ -94,7 +100,8 @@ let INITIAL_STATE = {
                                 {
                                     name: 'Apply',
                                     id: uuid(),
-                                    nodes: []
+                                    nodes: [],
+                                    average: 4555
                                 }
                             ]
                         }
@@ -107,12 +114,14 @@ let INITIAL_STATE = {
                         {
                             name: 'Repair',
                             id: uuid(),
-                            nodes: []
+                            nodes: [],
+                            average: 1074
                         },
                         {
                             name: 'Replace',
                             id: uuid(),
-                            nodes: []
+                            nodes: [],
+                            average: 11310
                         }
                     ]
                 },
@@ -123,12 +132,14 @@ let INITIAL_STATE = {
                         {
                             name: 'Repair',
                             id: uuid(),
-                            nodes: []
+                            nodes: [],
+                            average: 1175
                         },
                         {
                             name: 'Replace',
                             id: uuid(),
-                            nodes: []
+                            nodes: [],
+                            average: 3782
                         }
                     ]
                 },
@@ -139,12 +150,14 @@ let INITIAL_STATE = {
                         {
                             name: 'Repair',
                             id: uuid(),
-                            nodes: []
+                            nodes: [],
+                            average: 1296
                         },
                         {
                             name: 'Replace',
                             id: uuid(),
-                            nodes: []
+                            nodes: [],
+                            average: 7725
                         }
                     ]
                 },
@@ -155,12 +168,14 @@ let INITIAL_STATE = {
                         {
                             name: 'Repair',
                             id: uuid(),
-                            nodes: []
+                            nodes: [],
+                            average: 3280
                         },
                         {
                             name: 'Replace',
                             id: uuid(),
-                            nodes: []
+                            nodes: [],
+                            average: 0
                         }
                     ]
                 },

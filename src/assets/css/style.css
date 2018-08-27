@@ -36,16 +36,16 @@
 	color: #ddd;
 }
 
-li[aria-selected="true"].menuItem {
+.menuItemActive {
 	background-color: #122A38 !important;
 	border-color: #FDB852;
 	border-right: 5px solid #122A38;
 	border-left: 4px solid #FDB852;
 }
-li[aria-selected="true"].menuItem i {
+.menuItemActive i {
 	color: #FDB852;
 }
-li[aria-selected="true"].menuItem:after {
+.menuItemActive:after {
 	border-right: none;
 }
 .minorMenuItem {
@@ -63,16 +63,20 @@ li[aria-selected="true"].menuItem:after {
 }
 
 .inputLabel {
-	width: 10%;
+	width: 25%;
+	float: left;
 }
 .inputBox {
-	width: 30%;
+	width: 40%;
+	float: left;
 }
 .addNode {
-	width: 5%;
+	width: 10%;
+	float: right;
 }
 .deleteNode {
-	width: 5%;
+	width: 10%;
+	float: right;
 }
 .totalContainer {
 	width: 100%;
@@ -139,6 +143,7 @@ li[aria-selected="true"].menuItem:after {
 	cursor: pointer;
 	border: 1px solid #1F4257;
 	margin-top: 5px;
+	display: inline-block;
 }
 .nodeSelectable:hover {
 	width: 90%;
@@ -148,6 +153,7 @@ li[aria-selected="true"].menuItem:after {
 	cursor: pointer;
 	border: 1px solid #33A1C9;
 	margin-top: 5px;
+	display: inline-block;
 }
 
 .nodeSelectable:hover p, .nodeSelectable p:hover {
@@ -164,6 +170,17 @@ li[aria-selected="true"].menuItem:after {
 	color: #1F4257;
 	font-size: 20px;
 	font-weight: bold;
+}
+.nodeLeft {
+	width: 60%;
+	float: left;
+}
+.nodeRight {
+	width: 40%;
+	float: right;
+}
+.nodeRight p {
+	text-align: right;
 }
 .inlineCrumb {
 	width: 90%;
@@ -251,4 +268,24 @@ li[aria-selected="true"].menuItem:after {
 }
 .manageNode > p {
 	float: left;
+}
+.nodeInputContainer {
+	width: 90%;
+	margin-left: 5%;
+	margin-top: 10px;
+	display: inline-block;
+}
+.deleteIcon {
+	color: #fff;
+	background-color: #CD0000;
+	border-radius: 5px;
+	padding: 5px;
+	font-size: 20px;
+}
+.addIcon {
+	color: #fff;
+	background-color: #1F4257;
+	border-radius: 5px;
+	padding: 5px;
+	font-size: 20px;
 }

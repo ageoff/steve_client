@@ -6,18 +6,18 @@ import Decision from '../components/Decision'
 
 export const routeTable = [
 	{
-		title: 'Home',
-		key: 'Entry',
-		icon: 'home',
-		path: '/app/entry',
-		content: <Entry />,
+		title: 'Report Builder',
+		key: 'Decision',
+		icon: 'fork',
+		path: '/app/decision',
+		content: <Decision />,
 		careScenario: '',
 		csName: '',
 		showHeader: true,
 		inSideNav: true,
 		roles: [3, 4, 5, 6, 7, 8]
 	},
-    {
+  {
 		title: 'Admin',
 		key: 'Admin',
 		icon: 'user',
@@ -29,16 +29,16 @@ export const routeTable = [
 		inSideNav: true,
 		roles: [3, 4, 5, 6, 7, 8]
 	},
-    {
-		title: 'Report Builder',
-		key: 'Decision',
-		icon: 'fork',
-		path: '/app/decision',
-		content: <Decision />,
+	{
+		title: 'Home',
+		key: 'Entry',
+		icon: 'home',
+		path: '/app/entry',
+		content: <Entry />,
 		careScenario: '',
 		csName: '',
 		showHeader: true,
-		inSideNav: true,
+		inSideNav: false,
 		roles: [3, 4, 5, 6, 7, 8]
 	}
 ]

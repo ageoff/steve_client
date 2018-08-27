@@ -31,16 +31,17 @@ class Decision extends React.Component {
                     ))}
                 </div>
                 {node.nodes.map(n => (
-                    <div className={styles.nodeSelectable}>
-                        <p className={styles.nodeText} onClick={()=>{
-                            if (n.nodes.length == 0) {
-                                addSelectedTree(n.id)
-                                setCurrentTree('')
-                            }
-                            else {
-                                setCurrentTree(n.id)
-                            }
-                        }}>{n.name}</p>
+                    <div className={styles.nodeSelectable} onClick={()=>{
+                        if (n.nodes.length == 0) {
+                            addSelectedTree(n.id)
+                            setCurrentTree('')
+                        }
+                        else {
+                            setCurrentTree(n.id)
+                        }
+                    }}>
+                        <div className={styles.nodeLeft}><p className={styles.nodeText}>{n.name}</p></div>
+                        {n.average != null && <div className={styles.nodeRight}><p className={styles.nodeTest}>{'National Average: $'+(n.average||0).formatMoney()}</p></div>}
                     </div>
                 ))}
             </div>
@@ -51,8 +52,8 @@ class Decision extends React.Component {
         const { trees, currentTree, setCurrentTree } = this.props
         if (currentTree === '') {
             return trees.map(t => (
-                <div className={styles.nodeSelectable}>
-                    <p className={styles.nodeText} onClick={()=>setCurrentTree(t.id)}>{t.name}</p>
+                <div className={styles.nodeSelectable} onClick={()=>setCurrentTree(t.id)}>
+                    <p className={styles.nodeText}>{t.name}</p>
                 </div>
             ))
         }

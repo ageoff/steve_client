@@ -29,6 +29,7 @@ class MainLayout extends React.Component {
                         <p>Logo</p>
                     </div>
                     <Menu
+                        theme={'dark'}
                         onClick={onChangePage}
                         selectedKeys={[pathToKey(location.pathname)]}
                         mode="inline"
