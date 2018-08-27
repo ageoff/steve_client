@@ -26,8 +26,9 @@ class Decision extends React.Component {
         return (
             <div>
                 <div className={styles.inlineCrumb}>
+                    <span className={styles.crumbSelectable} onClick={()=>setCurrentTree('')}>{'Home'}</span>
                     {crumb.map((c, i) => (
-                        <span className={styles.crumbSelectable} onClick={()=>setCurrentTree(c.id)}>{c.name + ((i!=(crumb.length-1)) ? ' -> ' : '')}</span>
+                        <span><span className={styles.crumbText}>{' -> '}</span><span className={styles.crumbSelectable} onClick={()=>setCurrentTree(c.id)}>{c.name}</span></span>
                     ))}
                 </div>
                 {node.nodes.map(n => (
@@ -130,9 +131,15 @@ class Decision extends React.Component {
                     <p className={styles.sectionTitle}>{'Selected Items'}</p>
                     {selectedTrees.length == 0 && <div className={styles.inlineCrumb}><span className={styles.crumbText}>{'No Items Selected'}</span></div>}
                     {selectedTrees.map(id => (
-                        <div className={styles.inlineCrumb}>
-                            {this.getBreadcrumb(id).map(c => (<span className={styles.crumbText}>{c.name+' -> '}</span>))}
-                            <span className={styles.crumbText}>{'$'+this.getCost(id).formatMoney()}</span>
+                        <div className={styles.breadContainer}>
+                            <div className={styles.selectedLeft}>
+                                {this.getBreadcrumb(id).map((c, i) => (
+                                    <span className={styles.crumbText}>{c.name + (i!=(this.getBreadcrumb(id).length-1)? ' -> ':'')}</span>)
+                                )}
+                            </div>
+                            <div className={styles.selectedRight}>
+                                <p className={styles.crumbText}>{'$'+this.getCost(id).formatMoney()}</p>
+                            </div>
                         </div>
                     ))}
                 </div>
