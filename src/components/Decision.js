@@ -129,7 +129,7 @@ class Decision extends React.Component {
                 </div>
                 <div className={styles.breadcrumbContainer}>
                     <p className={styles.sectionTitle}>{'Selected Items'}</p>
-                    {selectedTrees.length == 0 && <div className={styles.inlineCrumb}><span className={styles.crumbText}>{'No Items Selected'}</span></div>}
+                    {selectedTrees.length == 0 && <div className={styles.breadContainer}><span className={styles.crumbText}>{'No Items Selected'}</span></div>}
                     {selectedTrees.map(id => (
                         <div className={styles.breadContainer}>
                             <div className={styles.selectedLeft}>

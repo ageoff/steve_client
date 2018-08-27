@@ -17,17 +17,17 @@
 .content {
     width: 100%;
 		position: relative;
-		background-color: #fff;
+		background-color: #F7F7F7;
 		padding-bottom: 122px;
 }
 
 .footer {
     width: 100%;
-		background-color: #fff;
+		background-color: #F7F7F7;
 }
 
 .menuItem {
-	color: #fff;
+	color: #F7F7F7;
 	background-color: #1F4257;
 	border-right: 5px solid #1F4257;
 	border-left: 4px solid #1F4257;
@@ -87,7 +87,7 @@
 	display: inline-block;
 	border: 5px solid #CD0000;
 	padding: 20px;
-	background-color: #fff;
+	background-color: #F7F7F7;
 }
 .totalTextLeft {
 	width: 40%;
@@ -107,13 +107,13 @@
 	padding: 10px;
 }
 .pageTitle {
-	color: #1F4257;
+	color: #33A1C9;
 	font-size:35px;
 	font-weight: bolder;
 	padding: 10px;
 }
 .sectionTitle {
-	color: #1F4257;
+	color: #33A1C9;
 	font-size: 25px;
 	font-weight: bold;
 	padding: 5px;
@@ -137,8 +137,8 @@
 	padding: 10px;
 }
 .nodeSelectable {
-	width: 90%;
-	margin-left: 5%;
+	width: 96%;
+	margin-left: 2%;
 	padding: 10px;
 	border-radius: 5px;
 	cursor: pointer;
@@ -147,8 +147,8 @@
 	display: inline-block;
 }
 .nodeSelectable:hover {
-	width: 90%;
-	margin-left: 5%;
+	width: 94%;
+	margin-left: 3%;
 	padding: 10px;
 	border-radius: 5px;
 	cursor: pointer;
@@ -205,8 +205,8 @@
 	text-align: right;
 }
 .inlineCrumb {
-	width: 90%;
-	margin-left: 5%;
+	width: 94%;
+	margin-left: 3%;
 	padding: 10px;
 	display: inline-block;
 }
@@ -255,7 +255,7 @@
 	float: right;
 }
 .smallButtonText {
-	color: #fff;
+	color: #F7F7F7;
 	font-size: 18px;
 	font-weight: bold;
 	text-align: center;
@@ -269,7 +269,7 @@
 	float: left;
 }
 .buttonText {
-	color: #fff;
+	color: #F7F7F7;
 	font-size: 20px;
 	font-weight: bold;
 	text-align: center;
@@ -281,8 +281,7 @@
 	margin-top: 10px;
 }
 .manageNode {
-	width: 90%;
-	margin-left: 5%;
+	width: 100%;
 	padding: 10px;
 	border-radius: 5px;
 	border: 1px solid #1F4257;
@@ -299,14 +298,14 @@
 	display: inline-block;
 }
 .deleteIcon {
-	color: #fff;
+	color: #F7F7F7;
 	background-color: #CD0000;
 	border-radius: 5px;
 	padding: 5px;
 	font-size: 20px;
 }
 .addIcon {
-	color: #fff;
+	color: #F7F7F7;
 	background-color: #1F4257;
 	border-radius: 5px;
 	padding: 5px;
