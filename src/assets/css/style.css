@@ -68,16 +68,31 @@
 	float: left;
 }
 .inputBox {
-	width: 40%;
+	width: 75%;
 	float: left;
+	margin: 10px;
+}
+.inputBox input {
+	padding: 5px;
+	border: 1px solid #1F4257;
+	border-radius: 5px;
+	margin: 5px;
+}
+.inputController {
+	width: 20%;
+	float: right;
+	text-align: right;
+	margin-top: 10px;
 }
 .addNode {
-	width: 10%;
+	width: 20%;
 	float: right;
+	text-align: right;
 }
 .deleteNode {
 	width: 10%;
 	float: right;
+	text-align: right;
 }
 .totalContainer {
 	width: 100%;
@@ -118,6 +133,12 @@
 	font-weight: bold;
 	padding: 5px;
 }
+.sectionTitle.ant-collapse-header {
+	color: #33A1C9;
+	font-size: 20px;
+	font-weight: bold;
+}
+
 .pickerContainer {
 	width: 90%;
 	margin-left: 5%;
@@ -292,22 +313,21 @@
 	float: left;
 }
 .nodeInputContainer {
-	width: 90%;
-	margin-left: 5%;
-	margin-top: 10px;
+	width: 100%;
 	display: inline-block;
 }
 .deleteIcon {
 	color: #F7F7F7;
 	background-color: #CD0000;
 	border-radius: 5px;
-	padding: 5px;
-	font-size: 20px;
+	padding: 10px;
+	font-size: 25px;
 }
 .addIcon {
 	color: #F7F7F7;
 	background-color: #1F4257;
 	border-radius: 5px;
-	padding: 5px;
-	font-size: 20px;
+	padding: 10px;
+	font-size: 25px;
+	margin-left: 10px;
 }

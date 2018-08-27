@@ -97,15 +97,17 @@ class Admin extends React.Component {
         const renderAddN = (node) => (
             <div>
                 {node.nodes.map(n => (
-                    <Collapse>
+                    <Collapse className={styles.sectionTitle}>
                         <Collapse.Panel header={n.name}>
                             <div className={styles.nodeInputContainer}>
                                 <div className={styles.inputBox}>
-                                    <p><span>{'Name: '}</span><input value={n.name} onChange={e=>this.modifyNode(n.id, e.target.value)}/></p>
-                                    <p><span>{'Average: $'}</span><input type='number' step='0.01' value={n.average || 0} onChange={e=>this.modifyNodeAverage(n.id, e.target.value)}/></p>
+                                    <p className={styles.crumbText}><span>{'Name: '}</span><input value={n.name} onChange={e=>this.modifyNode(n.id, e.target.value)}/></p>
+                                    <p className={styles.crumbText}><span>{'Average: $'}</span><input type='number' step='0.01' value={n.average || 0} onChange={e=>this.modifyNodeAverage(n.id, e.target.value)}/></p>
                                 </div>
-                                <div className={styles.addNode} onClick={this.addNewNode.bind(this, n.id)}><Icon className={styles.addIcon} type='plus' /></div>
-                                <div className={styles.deleteNode} onClick={this.deleteNode.bind(this, n.id)}><Icon className={styles.deleteIcon} type='delete' /></div>
+                                <div className={styles.inputController} >
+                                    <Icon className={styles.deleteIcon} type='delete' onClick={this.deleteNode.bind(this, n.id)}/>
+                                    <Icon className={styles.addIcon} type='plus' onClick={this.addNewNode.bind(this, n.id)}/>
+                                </div>
                             </div>
                             {renderAddN(n)}
                         </Collapse.Panel>
@@ -136,12 +138,14 @@ class Admin extends React.Component {
                 <div>
                     <p className={styles.pageTitle}>{'Edit Tree: ' + editNode.name}</p>
                     <div className={styles.adminContainer}>
-                        <Collapse defaultActiveKey={['1']}>
+                        <Collapse defaultActiveKey={['1']} className={styles.sectionTitle}>
                             <Collapse.Panel header={editNode.name}>
                                 <div className={styles.nodeInputContainer}>
-                                    <p className={styles.inputLabel}>{'Decision Tree Name: '}</p><input className={styles.inputBox} value={editNode.name} onChange={e=>this.modifyNode(editNode.id, e.target.value)}/>
+                                    <div className={styles.inputBox}>
+                                        <p className={styles.crumbText}><span>{'Tree Name: '}</span><input value={editNode.name} onChange={e=>this.modifyNode(editNode.id, e.target.value)}/></p>
+                                    </div>
                                     <div className={styles.addNode} onClick={() => this.addNewNode(editNode.id)}>
-                                        <div className={styles.saveButton}><Icon className={styles.addIcon} type='plus' /></div>
+                                        <Icon className={styles.addIcon} type='plus' />
                                     </div>
                                 </div>
                                 {renderAddN(editNode)}
@@ -163,12 +167,14 @@ class Admin extends React.Component {
                 <div>
                     <p className={styles.pageTitle}>{'Add Tree'}</p>
                     <div className={styles.adminContainer}>
-                        <Collapse defaultActiveKey={['1']}>
+                        <Collapse defaultActiveKey={['1']} className={styles.sectionTitle}>
                             <Collapse.Panel header={addNode.name}>
                                 <div className={styles.nodeInputContainer}>
-                                    <p className={styles.inputLabel}>{'Decision Tree Name: '}</p><input className={styles.inputBox} value={addNode.name} onChange={e=>this.modifyNode(addNode.id, e.target.value)}/>
+                                    <div className={styles.inputBox}>
+                                        <p className={styles.crumbText}><span>{'Tree Name: '}</span><input value={addNode.name} onChange={e=>this.modifyNode(addNode.id, e.target.value)}/></p>
+                                    </div>
                                     <div className={styles.addNode} onClick={() => this.addNewNode(addNode.id)}>
-                                        <div className={styles.saveButton}><Icon className={styles.addIcon} type='plus' /></div>
+                                        <Icon className={styles.addIcon} type='plus' />
                                     </div>
                                 </div>
                                 {renderAddN(addNode)}
