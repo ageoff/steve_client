@@ -17,7 +17,6 @@ class Decision extends React.Component {
             }
             checkChildren(t)
         })
-        console.log('Parent id: ' + parent)
         return parent
     }
     renderNodes(node) {
@@ -122,7 +121,7 @@ class Decision extends React.Component {
          };
         return (
             <div>
-                <p className={styles.pageTitle}>{'Report Builder'}</p>
+                <p className={styles.pageTitle}>{'Report Builders'}</p>
                 <div className={styles.pickerContainer}>
                     <p className={styles.sectionTitle}>{'Item Picker'}</p>
                     {this.renderCurrentTree()}

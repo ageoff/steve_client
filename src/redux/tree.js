@@ -1,6 +1,7 @@
 import { createAction, handleActions } from 'redux-actions'
 import Immutable from 'seamless-immutable'
 import uuid from 'uuid/v4'
+import Agent from '../lib/agent'
 
 let INITIAL_STATE = {
     selectedTree: {},
@@ -201,15 +202,9 @@ export const setEditNode = createAction('SET_EDIT_NODE')
 export const saveNode = (node, id = undefined) => {
     return (dispatch, getState) => {
         let data = [...getState().tree.data]
-        console.log('HERE IS THE DATA: ')
-        console.log(data)
         let index = -1
-        console.log(node)
-        console.log(id)
         if (id != null) {
-            console.log(id)
             data.every((n, i) => {
-                console.log(n)
                 if (n.id===id) {
                     index = i
                     return false
@@ -225,4 +220,14 @@ export const saveNode = (node, id = undefined) => {
             dispatch(setTreeData([...data, {...node}]))
         }
     }
+}
+export const loadNodes = () => {
+	return (dispatch,getState) => {
+        console.log('HELLOOO')
+		Agent.getNodes().then(result => {
+			console.log(result)
+		}).catch(error => {
+            console.log(error)
+        })
+	}
 }

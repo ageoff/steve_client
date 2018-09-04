@@ -11,8 +11,6 @@ import { setRouteLocation } from '../redux/user'
 
 const { Content, Footer, Sider } = Layout
 const MenuItem = Menu.Item
-console.log(styles)
-console.log(another)
 
 class MainLayout extends React.Component {
 	render() {

@@ -22,7 +22,7 @@ module.exports = {
 			{
 				test: /\.jsx?$/,
 				include: [ path.resolve(__dirname, 'src') ],
-				exclude: [ path.resolve(__dirname, 'node_modules') ],
+				exclude: /(node_modules)/,
 				use: [
 					{
 						loader: 'babel-loader',
@@ -77,7 +77,7 @@ module.exports = {
 		new HardSourceWebpackPlugin,
 		new webpack.DefinePlugin({
 			'process.env': {
-				'NODE_ENV': '"development"'
+				'NODE_ENV': '"production"'
 				//'NODE_ENV': '"testing"'
 			}
 		}),
