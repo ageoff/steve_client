@@ -13,8 +13,11 @@ export const store = ReduxStore
 
 const onBeforeLift = () => {}
 
+const local = 'http://localhost:8080'
+const test = 'http://ec2-18-222-146-229.us-east-2.compute.amazonaws.com:8080/steve-server-1.0'
+
 persistor.purge()
-Agent.configure('http://localhost:8080')
+Agent.configure(test)
 store.dispatch(loadNodes())
 
 render(

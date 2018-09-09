@@ -8,8 +8,7 @@ const configure = (baseURL, token = '') => {
 	state.api = create({
 		baseURL: baseURL,
 		headers: {'Content-Type': 'application/x-www-form-urlencoded',
-                    'Access-Control-Allow-Origin': "*",
-										'Accept': 'application/json'}
+								'Accept': 'application/json'}
 	})
 	// setToken(token)
 }
