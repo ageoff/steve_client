@@ -2,7 +2,7 @@ import { createAction, handleActions } from 'redux-actions'
 import Immutable from 'seamless-immutable'
 
 let INITIAL_STATE = Immutable({
-    location: {}
+	location: {}
 })
 
 // reducer

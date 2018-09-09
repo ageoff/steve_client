@@ -21,14 +21,14 @@ const config = {
 }
 const reducers = persistCombineReducers(config, {
 	user: userReducer,
-    tree: treeReducer,
-    app: appReducer
+	tree: treeReducer,
+	app: appReducer
 })
 
 export const ActionCreators = {
 	...user,
-    ...tree,
-    ...app
+	...tree,
+	...app
 }
 
 const middleware = [ thunk ]

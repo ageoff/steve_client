@@ -5,7 +5,6 @@ import App from './App'
 import { PersistGate } from 'redux-persist/es/integration/react'
 
 import { store as ReduxStore, persistor } from './redux'
-import { setHistory, resetHistory, resetUserState } from './redux/user'
 import { loadNodes } from './redux/tree'
 import Agent from './lib/agent'
 
@@ -21,12 +20,12 @@ Agent.configure(test)
 store.dispatch(loadNodes())
 
 render(
-    <Provider store={store}>
-			<PersistGate
-				persistor={persistor}
-				onBeforeLift={onBeforeLift}>
-					<App/>
-			</PersistGate>
-    </Provider>,
-    document.getElementById('app')
+	<Provider store={store}>
+		<PersistGate
+			persistor={persistor}
+			onBeforeLift={onBeforeLift}>
+			<App/>
+		</PersistGate>
+	</Provider>,
+	document.getElementById('app')
 )

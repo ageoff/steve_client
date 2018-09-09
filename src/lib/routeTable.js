@@ -17,7 +17,7 @@ export const routeTable = [
 		inSideNav: true,
 		roles: [3, 4, 5, 6, 7, 8]
 	},
-  {
+	{
 		title: 'Admin',
 		key: 'Admin',
 		icon: 'user',

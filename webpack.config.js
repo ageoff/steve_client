@@ -9,7 +9,7 @@ module.exports = {
 
 	entry: [
 		'babel-polyfill',
-		'./src/index.js',
+		'./src/index.js'
 	],
 
 	output: {
@@ -30,7 +30,7 @@ module.exports = {
 							cacheDirectory: true
 						}
 					}
-				],
+				]
 
 			},
 			/*
@@ -56,7 +56,7 @@ module.exports = {
 				test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
 				loader: 'url-loader',
 				options: { limit: 10000 }
-			},
+			}
 		]
 	},
 

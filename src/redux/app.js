@@ -3,9 +3,9 @@ import Immutable from 'seamless-immutable'
 import { aViewManage } from '../lib/constants'
 
 let INITIAL_STATE = Immutable({
-    adminView: aViewManage,
-		currentTree: '',
-		selectedTrees: []
+	adminView: aViewManage,
+	currentTree: '',
+	selectedTrees: []
 })
 
 // reducer
