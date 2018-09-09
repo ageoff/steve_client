@@ -10,8 +10,8 @@ class Decision extends React.Component {
 		let parent = ''
 		trees.map(t => {
 			const checkChildren = (node) => {
-				node.nodes.map(n => {
-					if (n.id == id) parent = node.id
+				node.children.map(n => {
+					if (n.uuid == id) parent = node.uuid
 					else checkChildren(n)
 				})
 			}
@@ -21,23 +21,23 @@ class Decision extends React.Component {
 	}
 	renderNodes(node) {
 		const { setCurrentTree, addSelectedTree } = this.props
-		let crumb = [...this.getBreadcrumb(node.id)]
+		let crumb = [...this.getBreadcrumb(node.uuid)]
 		return (
 			<div>
 				<div className={styles.inlineCrumb}>
 					<span className={styles.crumbSelectable} onClick={()=>setCurrentTree('')}>{'Home'}</span>
 					{crumb.map((c, i) => (
-						<span><span className={styles.crumbText}>{' -> '}</span><span className={styles.crumbSelectable} onClick={()=>setCurrentTree(c.id)}>{c.name}</span></span>
+						<span><span className={styles.crumbText}>{' -> '}</span><span className={styles.crumbSelectable} onClick={()=>setCurrentTree(c.uuid)}>{c.name}</span></span>
 					))}
 				</div>
-				{node.nodes.map(n => (
-					<div key={n.name} className={styles.nodeSelectable} onClick={()=>{
-						if (n.nodes.length == 0) {
-							addSelectedTree(n.id)
+				{node.children.map(n => (
+					<div key={n.name} className={styles.childrenelectable} onClick={()=>{
+						if (n.children.length == 0) {
+							addSelectedTree(n.uuid)
 							setCurrentTree('')
 						}
 						else {
-							setCurrentTree(n.id)
+							setCurrentTree(n.uuid)
 						}
 					}}>
 						<div className={styles.nodeLeft}><p className={styles.nodeText}>{n.name}</p></div>
@@ -52,7 +52,7 @@ class Decision extends React.Component {
 		const { trees, currentTree, setCurrentTree } = this.props
 		if (currentTree === '') {
 			return trees.map(t => (
-				<div className={styles.nodeSelectable} onClick={()=>setCurrentTree(t.id)}>
+				<div className={styles.childrenelectable} onClick={()=>setCurrentTree(t.uuid)}>
 					<p className={styles.nodeText}>{t.name}</p>
 				</div>
 			))
@@ -60,8 +60,8 @@ class Decision extends React.Component {
 		else {
 			let node = null
 			const checkNodes = (n) => {
-				if (n.id === currentTree) return node = n
-				else n.nodes.map(j => checkNodes(j))
+				if (n.uuid === currentTree) return node = n
+				else n.children.map(j => checkNodes(j))
 			}
 			trees.map(t => {
 				checkNodes(t)
@@ -75,10 +75,10 @@ class Decision extends React.Component {
 		let crumb = []
 		trees.map(t => {
 			const checkChildren = (node, c = []) => {
-				c.push({name: node.name, id: node.id})
-				if (node.id === id) crumb = c
-				node.nodes.map(n => {
-					if (n.id === id) crumb = [...c, {name: n.name, id: n.id}]
+				c.push({name: node.name, id: node.uuid})
+				if (node.uuid === id) crumb = c
+				node.children.map(n => {
+					if (n.uuid === id) crumb = [...c, {name: n.name, id: n.uuid}]
 					else checkChildren(n, [...c])
 				})
 			}
@@ -92,12 +92,12 @@ class Decision extends React.Component {
 		let cost = 0
 		trees.map(t => {
 			const checkChildren = (node) => {
-				node.nodes.map(n => {
-					if (n.id === id) cost = n.average || 0
+				node.children.map(n => {
+					if (n.uuid === id) cost = n.average || 0
 					else checkChildren(n)
 				})
 			}
-			if (t.id === id) cost = t.average || 0
+			if (t.uuid === id) cost = t.average || 0
 			else checkChildren(t)
 		})
 		return cost

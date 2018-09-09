@@ -4,30 +4,31 @@ import Agent from '../lib/agent'
 
 let INITIAL_STATE = {
 	selectedTree: {},
-	addNode:  {name: 'Untitled Node', id:uuid(), nodes: [], average: 0},
+	addNode:  {name: 'Untitled Node', uuid:uuid(), children: [], average: 0},
 	editNode: {},
-	data: [
+	data: []
+	/*[
 		{
 			name: 'Siding & Trim',
-			id: uuid(),
+			uuid: uuid(),
 			nodes: [
 				{
 					name: 'Trim',
-					id: uuid(),
+					uuid: uuid(),
 					nodes: [
 						{
 							name: 'Exterior Trim',
-							id: uuid(),
+							uuid: uuid(),
 							nodes: [
 								{
 									name: 'Repair',
-									id: uuid(),
+									uuid: uuid(),
 									nodes: [],
 									average: 0
 								},
 								{
 									name: 'Replace',
-									id: uuid(),
+									uuid: uuid(),
 									nodes: [],
 									average: 1779
 								}
@@ -35,17 +36,17 @@ let INITIAL_STATE = {
 						},
 						{
 							name: 'Interior Trim',
-							id: uuid(),
+							uuid: uuid(),
 							nodes: [
 								{
 									name: 'Repair',
-									id: uuid(),
+									uuid: uuid(),
 									nodes: [],
 									average: 625
 								},
 								{
 									name: 'Replace',
-									id: uuid(),
+									uuid: uuid(),
 									nodes: [],
 									average: 1234
 								}
@@ -55,17 +56,17 @@ let INITIAL_STATE = {
 				},
 				{
 					name: 'General Siding',
-					id: uuid(),
+					uuid: uuid(),
 					nodes: [
 						{
 							name: 'Repair',
-							id: uuid(),
+							uuid: uuid(),
 							nodes: [],
 							average: 540
 						},
 						{
 							name: 'Replace',
-							id: uuid(),
+							uuid: uuid(),
 							nodes: [],
 							average: 9161
 						}
@@ -73,21 +74,21 @@ let INITIAL_STATE = {
 				},
 				{
 					name: 'Vinyl or Liquid Siding',
-					id: uuid(),
+					uuid: uuid(),
 					nodes: [
 						{
 							name: 'Vinyl',
-							id: uuid(),
+							uuid: uuid(),
 							nodes: [
 								{
 									name: 'Repair',
-									id: uuid(),
+									uuid: uuid(),
 									nodes: [],
 									average: 0
 								},
 								{
 									name: 'Replace',
-									id: uuid(),
+									uuid: uuid(),
 									nodes: [],
 									average: 9775
 								}
@@ -95,11 +96,11 @@ let INITIAL_STATE = {
 						},
 						{
 							name: 'Liquid',
-							id: uuid(),
+							uuid: uuid(),
 							nodes: [
 								{
 									name: 'Apply',
-									id: uuid(),
+									uuid: uuid(),
 									nodes: [],
 									average: 4555
 								}
@@ -109,17 +110,17 @@ let INITIAL_STATE = {
 				},
 				{
 					name: 'Wood or Cement Siding',
-					id: uuid(),
+					uuid: uuid(),
 					nodes: [
 						{
 							name: 'Repair',
-							id: uuid(),
+							uuid: uuid(),
 							nodes: [],
 							average: 1074
 						},
 						{
 							name: 'Replace',
-							id: uuid(),
+							uuid: uuid(),
 							nodes: [],
 							average: 11310
 						}
@@ -127,17 +128,17 @@ let INITIAL_STATE = {
 				},
 				{
 					name: 'Stucco Siding',
-					id: uuid(),
+					uuid: uuid(),
 					nodes: [
 						{
 							name: 'Repair',
-							id: uuid(),
+							uuid: uuid(),
 							nodes: [],
 							average: 1175
 						},
 						{
 							name: 'Replace',
-							id: uuid(),
+							uuid: uuid(),
 							nodes: [],
 							average: 3782
 						}
@@ -145,17 +146,17 @@ let INITIAL_STATE = {
 				},
 				{
 					name: 'Metal or Steel Siding',
-					id: uuid(),
+					uuid: uuid(),
 					nodes: [
 						{
 							name: 'Repair',
-							id: uuid(),
+							uuid: uuid(),
 							nodes: [],
 							average: 1296
 						},
 						{
 							name: 'Replace',
-							id: uuid(),
+							uuid: uuid(),
 							nodes: [],
 							average: 7725
 						}
@@ -163,17 +164,17 @@ let INITIAL_STATE = {
 				},
 				{
 					name: 'Asbestos Siding',
-					id: uuid(),
+					uuid: uuid(),
 					nodes: [
 						{
 							name: 'Repair',
-							id: uuid(),
+							uuid: uuid(),
 							nodes: [],
 							average: 3280
 						},
 						{
 							name: 'Replace',
-							id: uuid(),
+							uuid: uuid(),
 							nodes: [],
 							average: 0
 						}
@@ -182,7 +183,7 @@ let INITIAL_STATE = {
 			]
 
 		}
-	]
+	]*/
 }
 
 // reducer
@@ -204,7 +205,7 @@ export const saveNode = (node, id = undefined) => {
 		let index = -1
 		if (id != null) {
 			data.every((n, i) => {
-				if (n.id===id) {
+				if (n.uuid===id) {
 					index = i
 					return false
 				}
@@ -221,8 +222,9 @@ export const saveNode = (node, id = undefined) => {
 	}
 }
 export const loadNodes = () => {
-	return () => {
+	return dispatch => {
 		Agent.getNodes().then(result => {
+			dispatch(setTreeData(result.data))
 			console.log(result)
 		}).catch(error => {
 			console.log(error)

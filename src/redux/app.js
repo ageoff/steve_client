@@ -20,18 +20,18 @@ export default handleActions({
 export const setAdminView = createAction('SET_ADMIN_VIEW')
 export const setCurrentTree = createAction('SET_CURRENT_TREE')
 export const setSelectedTrees = createAction('SET_SELECTED_TREES')
-export const addSelectedTree = (id) => {
+export const addSelectedTree = (uuid) => {
 	return (dispatch, getState) => {
 		let data = [...getState().app.selectedTrees]
-		dispatch(setSelectedTrees([...data, id]))
+		dispatch(setSelectedTrees([...data, uuid]))
 	}
 }
-export const deleteSelectedTree = (id) => {
+export const deleteSelectedTree = (uuid) => {
 	return (dispatch, getState) => {
 		let data = [...getState().app.selectedTrees]
 		let index = -1
 		data.every((d, i) => {
-			if (d === id) {
+			if (d === uuid) {
 				index = i
 				return false
 			}

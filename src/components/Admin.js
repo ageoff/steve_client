@@ -6,44 +6,34 @@ import { setSelectedTree, saveNode, setAddNode, setEditNode } from '../redux/tre
 import { setAdminView } from '../redux/app'
 import { aViewManage, aViewEdit, aViewAdd } from '../lib/constants'
 import uuid from 'uuid/v4'
-
+import { filterNodes, modifyNodes } from '../services/nodetools'
 import styles from '../assets/css/style.css'
 
 const { Panel } = Collapse.Panel
-const emptyNode = {name: 'Untitled Node', id:uuid(), nodes: [], average: 0}
+const emptyNode = {name: 'Untitled Node', uuid:uuid(), children: [], average: 0}
 
 class Admin extends React.Component {
 
 	generateNode() {
 		return {
 			name: 'Untitled Node',
-			id: uuid(),
-			nodes: []
+			uuid: uuid(),
+			children: []
 		}
 	}
 
 	deleteNode(id) {
 		const { addNode, editNode, setAddNode, setEditNode, aView } = this.props
 		let temp = aView === aViewAdd ? {...addNode} : {...editNode}
-		const filterNodes = (nodes, checkId) => {
-			nodes = nodes.filter(item => item.id !== checkId)
-			nodes.forEach(n => n.nodes = filterNodes(n.nodes, checkId))
-			return nodes
-		}
-		temp.nodes = filterNodes(temp.nodes, id)
+		temp.children = filterNodes(temp.children, id)
 		if (aView === aViewAdd) setAddNode(temp)
 		else setEditNode(temp)
 	}
 
-	modifyNode(id, text) {
+	editNode(id, text) {
 		const { addNode, editNode, setAddNode, setEditNode, aView } = this.props
-		let one = (aView === aViewAdd) ? {...addNode} : {...editNode}
-		let temp = {...one}
-		const checkNodes = (n, checkId) => {
-			if (n.id === checkId) n.name = text
-			else n.nodes.forEach(j => checkNodes(j, checkId))
-		}
-		checkNodes(temp, id)
+		let temp = (aView === aViewAdd) ? {...addNode} : {...editNode}
+		modifyNodes(temp, id, text)
 		if (aView === aViewAdd) setAddNode(temp)
 		else setEditNode(temp)
 	}
@@ -53,8 +43,8 @@ class Admin extends React.Component {
 		let one = (aView === aViewAdd) ? {...addNode} : {...editNode}
 		let temp = {...one}
 		const checkNodes = (n, checkId) => {
-			if (n.id === checkId) n.average = Number(text)
-			else n.nodes.forEach(j => checkNodes(j, checkId))
+			if (n.uuid === checkId) n.average = Number(text)
+			else n.children.forEach(j => checkNodes(j, checkId))
 		}
 		checkNodes(temp, id)
 		if (aView === aViewAdd) setAddNode(temp)
@@ -65,8 +55,8 @@ class Admin extends React.Component {
 		const { addNode, editNode, setAddNode, setEditNode, aView } = this.props
 		let temp = aView === aViewAdd ? {...addNode} : {...editNode}
 		const checkNodes = (n, checkId) => {
-			if (n.id === checkId) n.nodes = [...n.nodes, this.generateNode()]
-			else n.nodes.forEach(j => checkNodes(j, checkId))
+			if (n.uuid === checkId) n.children = [...n.children, this.generateNode()]
+			else n.children.forEach(j => checkNodes(j, checkId))
 		}
 		checkNodes(temp, id)
 		if (aView === aViewAdd) setAddNode(temp)
@@ -83,9 +73,9 @@ class Admin extends React.Component {
 	renderNodes(node) {
 		return (
 			<Collapse>
-				{node.nodes.length > 0 && node.nodes.map(n => (
+				{node.children.length > 0 && node.children.map(n => (
 					<Collapse.Panel header={n.name} key={n.name}>
-						{n.nodes.length > 0 && this.renderNodes(n)}
+						{n.children.length > 0 && this.renderNodes(n)}
 					</Collapse.Panel>
 				))}
 			</Collapse>
@@ -96,17 +86,17 @@ class Admin extends React.Component {
 		const { trees, aView, selectedTree, setAdminView, saveNode, setEditNode, addNode, editNode } = this.props
 		const renderAddN = (node) => (
 			<div>
-				{node.nodes.map(n => (
+				{node.children.map(n => (
 					<Collapse className={styles.sectionTitle}>
 						<Collapse.Panel header={n.name}>
 							<div className={styles.nodeInputContainer}>
 								<div className={styles.inputBox}>
-									<p className={styles.crumbText}><span>{'Name: '}</span><input value={n.name} onChange={e=>this.modifyNode(n.id, e.target.value)}/></p>
-									<p className={styles.crumbText}><span>{'Average: $'}</span><input type='number' step='0.01' value={n.average || 0} onChange={e=>this.modifyNodeAverage(n.id, e.target.value)}/></p>
+									<p className={styles.crumbText}><span>{'Name: '}</span><input value={n.name} onChange={e=>this.editNode(n.uuid, e.target.value)}/></p>
+									<p className={styles.crumbText}><span>{'Average: $'}</span><input type='number' step='0.01' value={n.average || 0} onChange={e=>this.modifyNodeAverage(n.uuid, e.target.value)}/></p>
 								</div>
 								<div className={styles.inputController} >
-									<Icon className={styles.deleteIcon} type='delete' onClick={this.deleteNode.bind(this, n.id)}/>
-									<Icon className={styles.addIcon} type='plus' onClick={this.addNewNode.bind(this, n.id)}/>
+									<Icon className={styles.deleteIcon} type='delete' onClick={this.deleteNode.bind(this, n.uuid)}/>
+									<Icon className={styles.addIcon} type='plus' onClick={this.addNewNode.bind(this, n.uuid)}/>
 								</div>
 							</div>
 							{renderAddN(n)}
@@ -142,9 +132,9 @@ class Admin extends React.Component {
 							<Collapse.Panel header={editNode.name}>
 								<div className={styles.nodeInputContainer}>
 									<div className={styles.inputBox}>
-										<p className={styles.crumbText}><span>{'Tree Name: '}</span><input value={editNode.name} onChange={e=>this.modifyNode(editNode.id, e.target.value)}/></p>
+										<p className={styles.crumbText}><span>{'Tree Name: '}</span><input value={editNode.name} onChange={e=>this.editNode(editNode.uuid, e.target.value)}/></p>
 									</div>
-									<div className={styles.addNode} onClick={() => this.addNewNode(editNode.id)}>
+									<div className={styles.addNode} onClick={() => this.addNewNode(editNode.uuid)}>
 										<Icon className={styles.addIcon} type='plus' />
 									</div>
 								</div>
@@ -154,7 +144,7 @@ class Admin extends React.Component {
 						<div className={styles.buttonContainer}>
 							<div className={styles.cancelButton}><p className={styles.buttonText} onClick={() => setAdminView(aViewManage)}>{'Cancel'}</p></div>
 							<div className={styles.saveButton} onClick={() => {
-								saveNode({...editNode}, editNode.id)
+								saveNode({...editNode}, editNode.uuid)
 								setEditNode({...emptyNode})
 								setAdminView(aViewManage)
 							}}><p className={styles.buttonText}>{'Save'}</p></div>
@@ -171,9 +161,9 @@ class Admin extends React.Component {
 							<Collapse.Panel header={addNode.name}>
 								<div className={styles.nodeInputContainer}>
 									<div className={styles.inputBox}>
-										<p className={styles.crumbText}><span>{'Tree Name: '}</span><input value={addNode.name} onChange={e=>this.modifyNode(addNode.id, e.target.value)}/></p>
+										<p className={styles.crumbText}><span>{'Tree Name: '}</span><input value={addNode.name} onChange={e=>this.editNode(addNode.uuid, e.target.value)}/></p>
 									</div>
-									<div className={styles.addNode} onClick={() => this.addNewNode(addNode.id)}>
+									<div className={styles.addNode} onClick={() => this.addNewNode(addNode.uuid)}>
 										<Icon className={styles.addIcon} type='plus' />
 									</div>
 								</div>
