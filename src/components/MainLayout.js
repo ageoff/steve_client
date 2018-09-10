@@ -4,8 +4,7 @@ import PropTypes from 'prop-types'
 import { Layout, Menu, Icon } from 'antd'
 
 import styles from '../assets/css/style.css'
-import another from '../App.css'
-import { keyToPath, pathToKey, content, showHeader, showEventComponents } from '../lib/routeFunc'
+import { keyToPath, pathToKey, content } from '../lib/routeFunc'
 import { routeTable } from '../lib/routeTable'
 import { setRouteLocation } from '../redux/user'
 
@@ -34,7 +33,7 @@ class MainLayout extends React.Component {
 					>
 						{nav.map((p) => (
 							<MenuItem className={styles.menuItem} key={p.key}>
-								<Icon type={p.icon} />
+								<Icon type={p.icon} theme="outlined" />
 								<span>{p.title}</span>
 							</MenuItem>
 						))}

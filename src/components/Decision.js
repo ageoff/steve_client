@@ -31,7 +31,7 @@ class Decision extends React.Component {
 					))}
 				</div>
 				{node.children.map(n => (
-					<div key={n.name} className={styles.childrenelectable} onClick={()=>{
+					<div key={n.name} className={styles.nodeSelectable} onClick={()=>{
 						if (n.children.length == 0) {
 							addSelectedTree(n.uuid)
 							setCurrentTree('')
@@ -41,7 +41,7 @@ class Decision extends React.Component {
 						}
 					}}>
 						<div className={styles.nodeLeft}><p className={styles.nodeText}>{n.name}</p></div>
-						{n.average != null && <div className={styles.nodeRight}><p className={styles.nodeTest}>{'National Average: $'+(n.average||0).formatMoney()}</p></div>}
+						{n.value != null && <div className={styles.nodeRight}><p className={styles.nodeTest}>{'National value: $'+(n.value||0).formatMoney()}</p></div>}
 					</div>
 				))}
 			</div>
@@ -52,7 +52,7 @@ class Decision extends React.Component {
 		const { trees, currentTree, setCurrentTree } = this.props
 		if (currentTree === '') {
 			return trees.map(t => (
-				<div className={styles.childrenelectable} onClick={()=>setCurrentTree(t.uuid)}>
+				<div className={styles.nodeSelectable} onClick={()=>setCurrentTree(t.uuid)}>
 					<p className={styles.nodeText}>{t.name}</p>
 				</div>
 			))
@@ -93,11 +93,11 @@ class Decision extends React.Component {
 		trees.map(t => {
 			const checkChildren = (node) => {
 				node.children.map(n => {
-					if (n.uuid === id) cost = n.average || 0
+					if (n.uuid === id) cost = n.value || 0
 					else checkChildren(n)
 				})
 			}
-			if (t.uuid === id) cost = t.average || 0
+			if (t.uuid === id) cost = t.value || 0
 			else checkChildren(t)
 		})
 		return cost

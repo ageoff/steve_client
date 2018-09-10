@@ -7,7 +7,7 @@ let state = {
 const configure = baseURL => {
 	state.api = create({
 		baseURL: baseURL,
-		headers: {'Content-Type': 'application/x-www-form-urlencoded',
+		headers: {'Content-Type': 'application/json',
 			'Accept': 'application/json'}
 	})
 }

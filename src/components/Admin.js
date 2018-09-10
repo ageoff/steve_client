@@ -10,7 +10,7 @@ import { filterNodes, modifyNodes } from '../services/nodetools'
 import styles from '../assets/css/style.css'
 
 const { Panel } = Collapse.Panel
-const emptyNode = {name: 'Untitled Node', uuid:uuid(), children: [], average: 0}
+const emptyNode = {name: 'Untitled Node', uuid:uuid(), children: [], value: 0}
 
 class Admin extends React.Component {
 
@@ -43,7 +43,7 @@ class Admin extends React.Component {
 		let one = (aView === aViewAdd) ? {...addNode} : {...editNode}
 		let temp = {...one}
 		const checkNodes = (n, checkId) => {
-			if (n.uuid === checkId) n.average = Number(text)
+			if (n.uuid === checkId) n.value = Number(text)
 			else n.children.forEach(j => checkNodes(j, checkId))
 		}
 		checkNodes(temp, id)
@@ -92,7 +92,7 @@ class Admin extends React.Component {
 							<div className={styles.nodeInputContainer}>
 								<div className={styles.inputBox}>
 									<p className={styles.crumbText}><span>{'Name: '}</span><input value={n.name} onChange={e=>this.editNode(n.uuid, e.target.value)}/></p>
-									<p className={styles.crumbText}><span>{'Average: $'}</span><input type='number' step='0.01' value={n.average || 0} onChange={e=>this.modifyNodeAverage(n.uuid, e.target.value)}/></p>
+									<p className={styles.crumbText}><span>{'value: $'}</span><input type='number' step='0.01' value={n.value || 0} onChange={e=>this.modifyNodeAverage(n.uuid, e.target.value)}/></p>
 								</div>
 								<div className={styles.inputController} >
 									<Icon className={styles.deleteIcon} type='delete' onClick={this.deleteNode.bind(this, n.uuid)}/>

@@ -4,7 +4,7 @@ import Agent from '../lib/agent'
 
 let INITIAL_STATE = {
 	selectedTree: {},
-	addNode:  {name: 'Untitled Node', uuid:uuid(), children: [], average: 0},
+	addNode:  {name: 'Untitled Node', uuid:uuid(), children: [], value: 0},
 	editNode: {},
 	data: []
 	/*[
@@ -24,13 +24,13 @@ let INITIAL_STATE = {
 									name: 'Repair',
 									uuid: uuid(),
 									nodes: [],
-									average: 0
+									value: 0
 								},
 								{
 									name: 'Replace',
 									uuid: uuid(),
 									nodes: [],
-									average: 1779
+									value: 1779
 								}
 							]
 						},
@@ -42,13 +42,13 @@ let INITIAL_STATE = {
 									name: 'Repair',
 									uuid: uuid(),
 									nodes: [],
-									average: 625
+									value: 625
 								},
 								{
 									name: 'Replace',
 									uuid: uuid(),
 									nodes: [],
-									average: 1234
+									value: 1234
 								}
 							]
 						}
@@ -62,13 +62,13 @@ let INITIAL_STATE = {
 							name: 'Repair',
 							uuid: uuid(),
 							nodes: [],
-							average: 540
+							value: 540
 						},
 						{
 							name: 'Replace',
 							uuid: uuid(),
 							nodes: [],
-							average: 9161
+							value: 9161
 						}
 					]
 				},
@@ -84,13 +84,13 @@ let INITIAL_STATE = {
 									name: 'Repair',
 									uuid: uuid(),
 									nodes: [],
-									average: 0
+									value: 0
 								},
 								{
 									name: 'Replace',
 									uuid: uuid(),
 									nodes: [],
-									average: 9775
+									value: 9775
 								}
 							]
 						},
@@ -102,7 +102,7 @@ let INITIAL_STATE = {
 									name: 'Apply',
 									uuid: uuid(),
 									nodes: [],
-									average: 4555
+									value: 4555
 								}
 							]
 						}
@@ -116,13 +116,13 @@ let INITIAL_STATE = {
 							name: 'Repair',
 							uuid: uuid(),
 							nodes: [],
-							average: 1074
+							value: 1074
 						},
 						{
 							name: 'Replace',
 							uuid: uuid(),
 							nodes: [],
-							average: 11310
+							value: 11310
 						}
 					]
 				},
@@ -134,13 +134,13 @@ let INITIAL_STATE = {
 							name: 'Repair',
 							uuid: uuid(),
 							nodes: [],
-							average: 1175
+							value: 1175
 						},
 						{
 							name: 'Replace',
 							uuid: uuid(),
 							nodes: [],
-							average: 3782
+							value: 3782
 						}
 					]
 				},
@@ -152,13 +152,13 @@ let INITIAL_STATE = {
 							name: 'Repair',
 							uuid: uuid(),
 							nodes: [],
-							average: 1296
+							value: 1296
 						},
 						{
 							name: 'Replace',
 							uuid: uuid(),
 							nodes: [],
-							average: 7725
+							value: 7725
 						}
 					]
 				},
@@ -170,13 +170,13 @@ let INITIAL_STATE = {
 							name: 'Repair',
 							uuid: uuid(),
 							nodes: [],
-							average: 3280
+							value: 3280
 						},
 						{
 							name: 'Replace',
 							uuid: uuid(),
 							nodes: [],
-							average: 0
+							value: 0
 						}
 					]
 				}
@@ -215,9 +215,19 @@ export const saveNode = (node, id = undefined) => {
 		if (index > -1) {
 			data[index] = {...node}
 			dispatch(setTreeData(data))
+			Agent.updateNode(node).then(result => {
+				console.log(result)
+			}).catch(error => {
+				console.log(error)
+			})
 		}
 		else {
 			dispatch(setTreeData([...data, {...node}]))
+			Agent.saveNode(node).then(result => {
+				console.log(result)
+			}).catch(error => {
+				console.log(error)
+			})
 		}
 	}
 }
