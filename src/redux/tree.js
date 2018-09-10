@@ -4,7 +4,7 @@ import Agent from '../lib/agent'
 
 let INITIAL_STATE = {
 	selectedTree: {},
-	addNode:  {name: 'Untitled Node', uuid:uuid(), children: [], value: 0},
+	addNode:  {name: 'Untitled Node', uuid:uuid(), children: [], value: 0, tree_node: true},
 	editNode: {},
 	data: []
 	/*[
@@ -233,7 +233,7 @@ export const saveNode = (node, id = undefined) => {
 }
 export const loadNodes = () => {
 	return dispatch => {
-		Agent.getNodes().then(result => {
+		Agent.getTrees().then(result => {
 			dispatch(setTreeData(result.data))
 			console.log(result)
 		}).catch(error => {

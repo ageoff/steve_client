@@ -2,31 +2,31 @@ i::before {
 	content: '' !important;
 }
 .mainLayout {
-    width: 100%;
-		height: 100%;
-    background-color: #1F4257;
+	width: 100%;
+	height: 100%;
+	background-color: #1F4257;
 }
 
 .sideNavContainer {
-    width: 25%;
-    background-color: #1F4257;
+	width: 25%;
+	background-color: #1F4257;
 }
 
 .innerLayout {
-    width: 75%;
-		max-width: 964px;
+	width: 75%;
+	max-width: 964px;
 }
 
 .content {
-    width: 100%;
-		position: relative;
-		background-color: #F7F7F7;
-		padding-bottom: 122px;
+	width: 100%;
+	position: relative;
+	background-color: #F7F7F7;
+	padding-bottom: 122px;
 }
 
 .footer {
-    width: 100%;
-		background-color: #F7F7F7;
+	width: 100%;
+	background-color: #F7F7F7;
 }
 
 .menuItem {
