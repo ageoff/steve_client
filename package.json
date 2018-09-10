@@ -29,7 +29,7 @@
     "dev": "webpack-dev-server --content-base public --inline --hot --colors --progress --history-api-fallback",
     "dash": "webpack-dashboard -- webpack-dev-server --content-base public --inline --hot --colors --progress --history-api-fallback",
     "testing": "node --max_old_space_size=8196 ./node_modules/webpack/bin/webpack.js --progress --color --profile --config webpack.test.js",
-    "prod": "node --max_old_space_size=8196 ./node_modules/webpack/bin/webpack.js --progress --color --profile --config webpack.config.js"
+    "prod": "node --max_old_space_size=8196 ./node_modules/webpack/bin/webpack.js --progress --color --profile --config webpack.prod.js"
   },
   "devDependencies": {
     "babel": "^6.23.0",
@@ -37,6 +37,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-0": "^6.24.1",
+    "clean-webpack-plugin": "0.1.19",
     "css-loader": "^1.0.0",
     "eslint-plugin-react-native": "3.2.1",
     "hard-source-webpack-plugin": "^0.12.0",

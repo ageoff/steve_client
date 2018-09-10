@@ -174,7 +174,7 @@ class Admin extends React.Component {
 							<div className={styles.cancelButton}><p className={styles.buttonText} onClick={() => setAdminView(aViewManage)}>{'Cancel'}</p></div>
 							<div className={styles.saveButton} onClick={() => {
 								saveNode({...addNode})
-								setAddNode({...emptyNode})
+								setAddNode({...emptyNode, tree:true})
 								setAdminView(aViewManage)
 							}}><p className={styles.buttonText}>{'Save'}</p></div>
 						</div>

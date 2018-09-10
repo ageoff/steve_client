@@ -4,7 +4,7 @@ import Agent from '../lib/agent'
 
 let INITIAL_STATE = {
 	selectedTree: {},
-	addNode:  {name: 'Untitled Node', uuid:uuid(), children: [], value: 0, tree_node: true},
+	addNode:  {name: 'Untitled Node', uuid:uuid(), children: [], value: 0, tree: true},
 	editNode: {},
 	data: []
 	/*[
