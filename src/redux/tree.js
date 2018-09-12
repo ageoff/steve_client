@@ -241,3 +241,21 @@ export const loadNodes = () => {
 		})
 	}
 }
+export const deleteTree = (id) => {
+	return (dispatch, getState) => {
+		let data = [...getState().tree.data].filter(item => {
+			if (item.uuid !== id) {
+				return true
+			}
+			else {
+				Agent.deleteNode(item).then(result => {
+					console.log(result)
+				}).catch(error => {
+					console.log(error)
+				})
+				return false
+			}
+		})
+		dispatch(setTreeData(data))
+	}
+}

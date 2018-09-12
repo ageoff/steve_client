@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete, Collapse } from 'antd'
-import { setSelectedTree, saveNode, setAddNode, setEditNode } from '../redux/tree'
+import { setSelectedTree, saveNode, setAddNode, setEditNode, deleteTree } from '../redux/tree'
 import { setAdminView } from '../redux/app'
 import { aViewManage, aViewEdit, aViewAdd } from '../lib/constants'
 import uuid from 'uuid/v4'
@@ -23,8 +23,14 @@ class Admin extends React.Component {
 	}
 
 	deleteNode(id) {
-		const { addNode, editNode, setAddNode, setEditNode, aView } = this.props
+		const { addNode, editNode, setAddNode, setEditNode, deleteTree, aView, setAdminView } = this.props
 		let temp = aView === aViewAdd ? {...addNode} : {...editNode}
+		if (temp.uuid === id) {
+			deleteTree(id)
+			setAdminView(aViewManage)
+			console.log('Hello')
+			return
+		}
 		temp.children = filterNodes(temp.children, id)
 		if (aView === aViewAdd) setAddNode(temp)
 		else setEditNode(temp)
@@ -134,8 +140,9 @@ class Admin extends React.Component {
 									<div className={styles.inputBox}>
 										<p className={styles.crumbText}><span>{'Tree Name: '}</span><input value={editNode.name} onChange={e=>this.editNode(editNode.uuid, e.target.value)}/></p>
 									</div>
-									<div className={styles.addNode} onClick={() => this.addNewNode(editNode.uuid)}>
-										<Icon className={styles.addIcon} type='plus' />
+									<div className={styles.addNode}>
+										<Icon className={styles.deleteIcon} type='delete' onClick={this.deleteNode.bind(this, editNode.uuid)}/>
+										<Icon className={styles.addIcon} type='plus' onClick={() => this.addNewNode(editNode.uuid)}/>
 									</div>
 								</div>
 								{renderAddN(editNode)}
@@ -193,7 +200,10 @@ Admin.propTypes = {
 	//Fuctions
 	setSelectedTree: PropTypes.func.isRequired,
 	setAdminView: PropTypes.func.isRequired,
-	saveNode: PropTypes.func.isRequired
+	saveNode: PropTypes.func.isRequired,
+	setEditNode: PropTypes.func.isRequired,
+	setAddNode: PropTypes.func.isRequired,
+	deleteTree: PropTypes.func.isRequired
 }
 const mapStateToProps = state => ({
 	trees: state.tree.data,
@@ -207,6 +217,7 @@ const mapDispatchToProps = dispatch => ({
 	setAdminView: (view) => dispatch(setAdminView(view)),
 	saveNode: (node, id = undefined) => dispatch(saveNode(node, id)),
 	setAddNode: (node) => dispatch(setAddNode(node)),
-	setEditNode: (node) => dispatch(setEditNode(node))
+	setEditNode: (node) => dispatch(setEditNode(node)),
+	deleteTree: (id) => dispatch(deleteTree(id))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Admin)
