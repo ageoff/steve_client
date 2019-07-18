@@ -6,6 +6,10 @@ import thunk from 'redux-thunk'
 
 import userReducer from './user'
 import * as user from './user'
+import treeReducer from './tree'
+import * as tree from './tree'
+import appReducer from './app'
+import * as app from './app'
 
 const encryptor = createEncryptor({
 	secretKey: 'spot-lager-extra'
@@ -16,11 +20,15 @@ const config = {
 	storage: sessionStorage
 }
 const reducers = persistCombineReducers(config, {
-	user: userReducer
+	user: userReducer,
+	tree: treeReducer,
+	app: appReducer
 })
 
 export const ActionCreators = {
-	...user
+	...user,
+	...tree,
+	...app
 }
 
 const middleware = [ thunk ]

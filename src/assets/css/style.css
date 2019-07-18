@@ -1,0 +1,336 @@
+i::before {
+	content: '' !important;
+}
+.mainLayout {
+	width: 100%;
+	height: 100%;
+	background-color: #1F4257;
+}
+
+.sideNavContainer {
+	width: 25%;
+	background-color: #1F4257;
+}
+
+.innerLayout {
+	width: 75%;
+	max-width: 964px;
+}
+
+.content {
+	width: 100%;
+	position: relative;
+	background-color: #F7F7F7;
+	padding-bottom: 122px;
+}
+
+.footer {
+	width: 100%;
+	background-color: #F7F7F7;
+}
+
+.menuItem {
+	color: #F7F7F7;
+	background-color: #1F4257;
+	border-right: 5px solid #1F4257;
+	border-left: 4px solid #1F4257;
+}
+
+.menuItem:hover {
+	color: #ddd;
+}
+
+.menuItemActive {
+	background-color: #122A38 !important;
+	border-color: #FDB852;
+	border-right: 5px solid #122A38;
+	border-left: 4px solid #FDB852;
+}
+.menuItemActive i {
+	color: #FDB852;
+}
+.menuItemActive:after {
+	border-right: none;
+}
+.minorMenuItem {
+	color: #8FA0AA;
+	background-color: #1F4257;
+	border-right: 5px solid #1F4257;
+	border-left: 4px solid #1F4257;
+}
+.minorMenuItem:hover {
+	color: #ddd;
+}
+
+.innerNodeAdd {
+	margin-left: 5%;
+}
+
+.inputLabel {
+	width: 25%;
+	float: left;
+}
+.inputBox {
+	width: 75%;
+	float: left;
+	margin: 10px;
+}
+.inputBox input {
+	padding: 5px;
+	border: 1px solid #1F4257;
+	border-radius: 5px;
+	margin: 5px;
+}
+.inputController {
+	width: 20%;
+	float: right;
+	text-align: right;
+	margin-top: 10px;
+}
+.addNode {
+	width: 20%;
+	float: right;
+	text-align: right;
+}
+.deleteNode {
+	width: 10%;
+	float: right;
+	text-align: right;
+}
+.totalContainer {
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	border-radius: 7px;
+	display: inline-block;
+	border: 5px solid #CD0000;
+	padding: 20px;
+	background-color: #F7F7F7;
+}
+.totalTextLeft {
+	width: 40%;
+	color: #CD0000;
+	font-size: 35px;
+	font-weight: bolder;
+	float: left;
+	padding: 10px;
+}
+.totalTextRight {
+	width: 40%;
+	color: #CD0000;
+	font-size: 35px;
+	font-weight: bolder;
+	float: right;
+	text-align: right;
+	padding: 10px;
+}
+.pageTitle {
+	color: #33A1C9;
+	font-size:35px;
+	font-weight: bolder;
+	padding: 10px;
+}
+.sectionTitle {
+	color: #33A1C9;
+	font-size: 25px;
+	font-weight: bold;
+	padding: 5px;
+}
+.sectionTitle.ant-collapse-header {
+	color: #33A1C9;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.pickerContainer {
+	width: 90%;
+	margin-left: 5%;
+	border: 1px solid #B0A6A4;
+	border-radius: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 10px;
+}
+.breadcrumbContainer {
+	width: 90%;
+	margin-left: 5%;
+	border: 1px solid #B0A6A4;
+	border-radius: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 10px;
+}
+.nodeSelectable {
+	width: 96%;
+	margin-left: 2%;
+	padding: 10px;
+	border-radius: 5px;
+	cursor: pointer;
+	border: 1px solid #1F4257;
+	margin-top: 5px;
+	display: inline-block;
+}
+.nodeSelectable:hover {
+	width: 94%;
+	margin-left: 3%;
+	padding: 10px;
+	border-radius: 5px;
+	cursor: pointer;
+	border: 1px solid #33A1C9;
+	margin-top: 5px;
+	display: inline-block;
+}
+
+.nodeSelectable:hover p, .nodeSelectable p:hover {
+	color: #33A1C9;
+	font-size: 20px;
+	font-weight: bold;
+}
+.nodeSelectable p {
+	color: #1F4257;
+	font-size: 20px;
+	font-weight: bold;
+}
+.nodeText {
+	color: #1F4257;
+	font-size: 20px;
+	font-weight: bold;
+}
+.nodeLeft {
+	width: 60%;
+	float: left;
+}
+.nodeRight {
+	width: 40%;
+	float: right;
+}
+.nodeRight p {
+	text-align: right;
+}
+.breadContainer {
+	width: 96%;
+	margin-left: 2%;
+	margin-top: 5px;
+	padding-bottom: 5px;
+	display: inline-block;
+}
+.breadContainer:not(:last-child) {
+	border-bottom: 1px solid #1F4257;
+}
+.selectedLeft {
+	width: 85%;
+	float: left;
+}
+.selectedRight {
+	width: 15%;
+	float: right
+}
+.selectedRight p {
+	text-align: right;
+}
+.inlineCrumb {
+	width: 94%;
+	margin-left: 3%;
+	padding: 10px;
+	display: inline-block;
+}
+.crumbText {
+	color: #1F4257;
+	font-size: 20px;
+	font-weight: bold;
+}
+.crumbSelectable {
+	color: #1F4257;
+	font-size: 20px;
+	font-weight: bold;
+}
+.crumbSelectable:hover, .crumbSelectable:active {
+	color: #33A1C9;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.buttonContainer {
+	width: 100%;
+	margin-top: 15px;
+	display: inline-block;
+}
+.saveButton {
+	width: 40%;
+	margin-left: 2%;
+	background-color: #1F4257;
+	border-radius: 5px;
+	float: left;
+}
+.addContainer {
+	width: 100%;
+	display: inline-block;
+}
+.addButton {
+	width: 20%;
+	background-color: #1F4257;
+	border-radius: 5px;
+	float: right;
+}
+.editButton {
+	width: 20%;
+	background-color: #4DBD33;
+	border-radius: 5px;
+	float: right;
+}
+.smallButtonText {
+	color: #F7F7F7;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	padding: 5px;
+}
+.cancelButton {
+	width: 40%;
+	margin-left: 9%;
+	background-color: #CD0000;
+	border-radius: 5px;
+	float: left;
+}
+.buttonText {
+	color: #F7F7F7;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	padding: 10px;
+}
+.adminContainer {
+	width: 90%;
+	margin-left: 5%;
+	margin-top: 10px;
+}
+.manageNode {
+	width: 100%;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid #1F4257;
+	margin-top: 5px;
+	display: inline-block;
+}
+.manageNode > p {
+	float: left;
+}
+.nodeInputContainer {
+	width: 100%;
+	display: inline-block;
+}
+.deleteIcon {
+	color: #F7F7F7;
+	background-color: #CD0000;
+	border-radius: 5px;
+	padding: 10px;
+	font-size: 25px;
+}
+.addIcon {
+	color: #F7F7F7;
+	background-color: #1F4257;
+	border-radius: 5px;
+	padding: 10px;
+	font-size: 25px;
+	margin-left: 10px;
+}

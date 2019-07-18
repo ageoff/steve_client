@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Steve Client",
+  "name": "Sample POC for Steve Client",
   "icons": [
     {
       "src": "favicon.ico",

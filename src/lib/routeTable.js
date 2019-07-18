@@ -6,39 +6,39 @@ import Decision from '../components/Decision'
 
 export const routeTable = [
 	{
-		title: 'Entry',
-		key: 'Entry',
-		icon: 'area-chart',
-		path: '/app/entry',
-		content: <Entry />,
-		careScenario: '',
-		csName: '',
-		showHeader: true,
-		showEventComponents: false,
-		roles: [3, 4, 5, 6, 7, 8]
-	},
-    {
-		title: 'Admin',
-		key: 'Admin',
-		icon: 'area-chart',
-		path: '/app/admin',
-		content: <Admin />,
-		careScenario: '',
-		csName: '',
-		showHeader: true,
-		showEventComponents: false,
-		roles: [3, 4, 5, 6, 7, 8]
-	},
-    {
-		title: 'Decision',
+		title: 'Report Builder',
 		key: 'Decision',
-		icon: 'area-chart',
+		icon: 'fork',
 		path: '/app/decision',
 		content: <Decision />,
 		careScenario: '',
 		csName: '',
 		showHeader: true,
-		showEventComponents: false,
+		inSideNav: true,
+		roles: [3, 4, 5, 6, 7, 8]
+	},
+	{
+		title: 'Admin',
+		key: 'Admin',
+		icon: 'user',
+		path: '/app/admin',
+		content: <Admin />,
+		careScenario: '',
+		csName: '',
+		showHeader: true,
+		inSideNav: true,
+		roles: [3, 4, 5, 6, 7, 8]
+	},
+	{
+		title: 'Home',
+		key: 'Entry',
+		icon: 'home',
+		path: '/app/entry',
+		content: <Entry />,
+		careScenario: '',
+		csName: '',
+		showHeader: true,
+		inSideNav: false,
 		roles: [3, 4, 5, 6, 7, 8]
 	}
 ]
